@@ -1,5 +1,4 @@
 django>=4.2,<4.3
 sqlparse==0.5.3
-psycopg2
 Pillow
 djangorestframework

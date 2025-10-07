@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'home.apps.HomeConfig',
     'accounting.apps.AccountingConfig',
-    'contactus.apps.ContactusConfig'
+    'contactus.apps.ContactusConfig',
+    'aboutus.apps.AboutusConfig'
 
 ]
 
@@ -137,3 +138,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEBUG = True
 
 AUTH_USER_MODEL = 'accounting.User'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    )
+}
