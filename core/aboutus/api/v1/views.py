@@ -2,12 +2,75 @@ import base64
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.views import APIView
+from aboutus.models import *
 from aboutus.api.v1.serializers.ProjectSerializer import ProjectSerializer
 from aboutus.api.v1.serializers.ProjectImageSerializer import ProjectImageSerializer
 from aboutus.api.v1.serializers.ProjectDetailSerializer import ProjectDetailSerializer
-from aboutus.models import *
-from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.views import APIView
+from aboutus.api.v1.serializers.AbotusSerializer import AboutusSerializer
+from aboutus.api.v1.serializers.FeautreSerializer import FetaureSerializer
+
+
+
+class AboutusAPIView(GenericAPIView):
+    serializer_class = AboutusSerializer
+
+    
+    def get_queryset(self):
+        id = self.kwargs.get('id')
+        if id:
+            return Aboutus.objects.filter(id=id).first()
+        return Aboutus.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        if self.kwargs.get('id'):
+            serializer = self.serializer_class(queryset)
+        else:
+            serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)  
+
+    def put(self, request, *args, **kwargs):
+        aboutusID = self.kwargs.get('id')
+        queryset = Aboutus.objects.filter(id=aboutusID).first()
+        serializer = self.serializer_class(queryset, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    
+
+class FeatureAPIView(GenericAPIView):
+    serializer_class = FetaureSerializer
+    parser_classes = [MultiPartParser, FormParser]
+
+    def get_queryset(self):
+
+        abousID = self.kwargs.get('id')
+        featureID = self.kwargs.get('pk')
+
+        if(abousID and featureID):
+            return Fetaure.objects.filter(id=featureID, aboutus_id=abousID).all()
+        else:
+            return Fetaure.objects.filter(aboutus_id=abousID).all()
+       
+    def get(self, request, id, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request, *args, **kwargs):
+        aboutusID = self.kwargs.get('id')
+        serializer = self.serializer_class(data=request.data, context={'aboutus_id': aboutusID})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)  
 
 
 class ProjectAPIView(GenericAPIView):
@@ -62,9 +125,9 @@ class ProjectImageAPIView(APIView):
 
         saved_images = []
         for image in images:
-            serializer = self.serializer_class(data={'image': image})
+            serializer = self.serializer_class(data={'image': image}, context={'project_id': projectID})
             serializer.is_valid(raise_exception=True)
-            serializer.save(project=project)
+            serializer.save()
             saved_images.append(serializer.data)
         return Response(saved_images, status=status.HTTP_201_CREATED)
     
@@ -104,11 +167,11 @@ class ProjectDetailAPIView(GenericAPIView):
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
-        projectid = self.kwargs['id']
-        project = Project.objects.filter(id=projectid).first()
+        projectID = self.kwargs['id']
+        serializer = self.serializer_class(data=request.data, context={'project_id': projectID})
+        
         serializer.is_valid(raise_exception=True)
-        serializer.save(project=project)
+        serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def put(self, request, *args, **kwargs):

@@ -13,4 +13,7 @@ urlpatterns = [
     path("project/<int:id>/detail/", ProjectDetailAPIView.as_view(), name="project-detail"),
     path("project/<int:id>/detail/<int:pk>/", ProjectDetailAPIView.as_view(), name="project-detail"),
     path("project/<int:id>/detail/<int:pk>/delete/", ProjectDetailAPIView.as_view(), name="project-detail"),
+    path("", AboutusAPIView.as_view(), name="aboutus"),
+    path("<int:id>/", AboutusAPIView.as_view(), name="aboutus"),
+    path("<int:id>/feature/", FeatureAPIView.as_view(), name="feature"),
 ]

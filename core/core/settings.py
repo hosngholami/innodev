@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'accounting.apps.AccountingConfig',
     'contactus.apps.ContactusConfig',
-    'aboutus.apps.AboutusConfig'
+    'aboutus.apps.AboutusConfig',
+    'blog.apps.BlogConfig',
 
 ]
 
