@@ -59,3 +59,9 @@ class ProjectDetail(models.Model):
         verbose_name = "جزعیات پروژه"
     
 
+class Service(models.Model):
+    title = models.CharField(max_length=150, null=False, verbose_name="عنوان")
+    description = models.TextField(verbose_name="توضیحات")
+    icon = models.ImageField(upload_to='', verbose_name="آیکون")
+    createdDate = models.DateTimeField(auto_now_add=True, null=True, verbose_name="تاریخ ثبت")
+    updateDate = models.DateTimeField(auto_now=True, null=True, verbose_name="تاریخ ویرایش")

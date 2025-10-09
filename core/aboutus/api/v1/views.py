@@ -10,6 +10,7 @@ from aboutus.api.v1.serializers.ProjectImageSerializer import ProjectImageSerial
 from aboutus.api.v1.serializers.ProjectDetailSerializer import ProjectDetailSerializer
 from aboutus.api.v1.serializers.AbotusSerializer import AboutusSerializer
 from aboutus.api.v1.serializers.FeautreSerializer import FetaureSerializer
+from aboutus.api.v1.serializers.ServiceSerializer import ServiceSerializer
 
 
 
@@ -190,6 +191,53 @@ class ProjectDetailAPIView(GenericAPIView):
             project.delete()
 
         except ProjectImage.DoesNotExist:
+            return Response({'detail': "حذف با خطا مواجه شد."}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({'detail': 'حذف با موفقیت انجام شد.'}, status=status.HTTP_204_NO_CONTENT)
+    
+
+
+class ServiceAPIView(GenericAPIView):
+
+    serializer_class = ServiceSerializer
+    parser_classes = [MultiPartParser, FormParser]
+
+    
+    def get_queryset(self):
+        serviceID = self.kwargs.get('id')
+        if(serviceID):
+            return Service.objects.filter(id=serviceID).all()
+        return Service.objects.all()
+
+    def get(self, request, *args, **kwargs):
+
+        queryset = self.get_queryset()
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def put(self, request, *args, **kwargs):
+        serviceID = self.kwargs.get('id')
+        queryset = Service.objects.filter(id=serviceID).first()
+        serializer = self.serializer_class(queryset, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    
+
+    def delete(self, request, *args, **kwargs):
+        serviceID = self.kwargs.get('id')
+        try:
+            project = Service.objects.filter(id=serviceID).first()
+            project.delete()
+
+        except Service.DoesNotExist:
             return Response({'detail': "حذف با خطا مواجه شد."}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({'detail': 'حذف با موفقیت انجام شد.'}, status=status.HTTP_204_NO_CONTENT)
