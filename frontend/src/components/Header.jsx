@@ -1,10 +1,18 @@
 import { Link } from 'react-router-dom'
 import { Helmet } from "react-helmet";
+import { useState } from 'react';
 export const Header = () => {
 
   const title = "خرید آنلاین"
+  const [name, setName] = useState("")
+  const [isValidForm, setIsValidForm] = useState(false)
+  const setNameValue = (event) => {
+      setName(event.target.value)
+  }
 
+  const checkValidForm = () => {
 
+  }
   return (
     <>
       <header className="main-header header header_v13">
@@ -479,6 +487,110 @@ export const Header = () => {
         </section>
 
       </header>
+      <div className="modal_popup one">
+        <div className="modal-popup-inner">
+          <div className="close-modal"><i className="fa fa-times"></i></div>
+          <div className="modal_box">
+            <div className="row">
+              <div className="col-lg-5 col-md-12 form_inner">
+                <div className="form_content">
+                  <form className="contact-form" method="post" action="sendemail.php">
+                    <p>
+                      <label> نام شما<br />
+                        <input type="text" name="name"  size="40" onChange={setNameValue}
+                          placeholder="نام خود را وارد کنید" />
+                          <p>{name}</p>
+                        <br />
+                        <i className="fa fa-user"></i><br />
+                      </label>
+                    </p>
+                    <p><label> ایمیل شما<br />
+                      <input type="email" name="email" value=""  size="40" aria-required="true" aria-invalid="false"
+                        placeholder="ایمیل خود  را وارد کنید" />
+                      <br />
+                      <i className="fa fa-envelope"></i><br />
+                    </label>
+                    </p>
+                    <p>
+                      <label> عنوان<br />
+                        <input type="text" name="subject"  size="40" aria-required="true" aria-invalid="false"
+                          placeholder="عنوان خود را وارد کنید" />
+                        <br />
+                        <i className="fa fa-folder"></i><br />
+                      </label>
+                    </p>
+                    <p>
+                      <label> پیام شما (اختیاری)<br />
+                        <textarea name="message" cols="40" rows="10" className="wpcf7-form-control wpcf7-textarea"
+                          aria-invalid="false" placeholder="نام خود را وارد کنید"></textarea>
+                        <br />
+                        <i className="fa fa-comments"></i><br />
+                      </label>
+                    </p>
+                    <p><input type="button" disabled={isValidFormpppp
+                      
+                    }  value="ارسال" /></p>
+
+                  </form>
+
+                </div>
+              </div>
+              <div className="col-lg-7 col-md-12 about_company_inner">
+                <div className="abt_content">
+                  <div className="logo">
+                    <img src="src/assets/images/logo-default.png" alt="تصویر" className="company_logo_modal" />
+                  </div>
+                  <div className="text">
+                    <p> کاشف بزرگ حقیقت، استاد ساز خوشبختی انسان را هیچ کس رد نمی کند
+                      دوست ندارد از خود لذت دوری می کند زیرا لذت است، اما به این دلیل که بدانیم چه کسی آن ها را نمی داند
+                      چگونه می توان لذت ها را به طور منطقی دنبال کرد، با عواقبی روبرو می شود که بسیار دردناک است
+                      تمایل به به دست آوردن.</p>
+                    <a href="home-13.html#">بیشتر بخوانید</a>
+                  </div>
+                  <div className="post_contet_modal">
+                    <h2> آخرین اخبار</h2>
+                    <div className="post_enable">
+                      <div className="modal_post_grid">
+                        <a href="blog-single.html">
+                          <img width="852" height="812" src="src/assets/images/blog/blog-image-9.jpg"
+                            className="main_img wp-post-image" alt="تصویر" />
+                        </a>
+                      </div>
+                      <div className="modal_post_grid">
+                        <a href="blog-single.html">
+                          <img width="852" height="812" src="src/assets/images/blog/blog-image-8.jpg"
+                            className="main_img wp-post-image" alt="تصویر" />
+                        </a>
+                      </div>
+                      <div className="modal_post_grid">
+                        <a href="blog-single.html">
+                          <img width="852" height="812" src="src/assets/images/blog/blog-image-7.jpg"
+                            className="main_img wp-post-image" alt="تصویر" />
+                        </a>
+                      </div>
+                      <div className="modal_post_grid">
+                        <a href="blog-single.html">
+                          <img width="852" height="812" src="src/assets/images/blog/blog-image-6.jpg"
+                            className="main_img wp-post-image" alt="تصویر" />
+                        </a>
+                      </div>
+                      <div className="modal_post_grid">
+                        <a href="blog-single.html">
+                          <img width="852" height="812" src="src/assets/images/blog/blog-image-5.jpg"
+                            className="main_img wp-post-image" alt="تصویر" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="copright">
+                    © 1402 کریوت. تمامی حقوق محفوظ است
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

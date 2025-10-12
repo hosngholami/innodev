@@ -1700,7 +1700,7 @@ select:active {
   border-color: var(--primary-color-one);
 }
 
-body input[type=submit], body button[type=submit] {
+body input[type=submit], body button[type=submit], body input[type=button] {
   position: relative;
   display: inline-block;
   min-width: 160px;
