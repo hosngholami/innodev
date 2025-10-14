@@ -9,11 +9,8 @@ import { SingUp } from './pages/SingUp'
 
 function App() {
   return (
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/singup' element={<SingUp />} />
-      </Routes>
+     <>
+     </>
   )
 }
 

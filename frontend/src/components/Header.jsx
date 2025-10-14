@@ -5,7 +5,7 @@ export const Header = () => {
 
 
   return (
-    <>
+    <div class="header_area" id="header_contents">
       <header className="main-header header header_v13">
         <section className="header_top">
           <div className="medium-container">
@@ -488,14 +488,14 @@ export const Header = () => {
                   <form className="contact-form" method="post" action="sendemail.php">
                     <p>
                       <label> نام شما<br />
-                        <input type="text" name="name"  size="40"
+                        <input type="text" name="name" size="40"
                           placeholder="نام خود را وارد کنید" />
                         <br />
                         <i className="fa fa-user"></i><br />
                       </label>
                     </p>
                     <p><label> ایمیل شما<br />
-                      <input type="email" name="email" value=""  size="40" aria-required="true" aria-invalid="false"
+                      <input type="email" name="email" value="" size="40" aria-required="true" aria-invalid="false"
                         placeholder="ایمیل خود  را وارد کنید" />
                       <br />
                       <i className="fa fa-envelope"></i><br />
@@ -503,7 +503,7 @@ export const Header = () => {
                     </p>
                     <p>
                       <label> عنوان<br />
-                        <input type="text" name="subject"  size="40" aria-required="true" aria-invalid="false"
+                        <input type="text" name="subject" size="40" aria-required="true" aria-invalid="false"
                           placeholder="عنوان خود را وارد کنید" />
                         <br />
                         <i className="fa fa-folder"></i><br />
@@ -579,6 +579,6 @@ export const Header = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
