@@ -1192,7 +1192,7 @@ export const Home = () => {
                                         <div className="image_box">
                                             <img width="750" height="420" src="src/assets/images/blog/blog-image-6.jpg" className="img-fluid"
                                                 alt="" decoding="async" loading="lazy"
-                                                srcset="assets/images/blog/blog-image-6.jpg 750w, assets/images/blog/blog-image-6-600x336.jpg 600w, assets/images/blog/blog-image-6-300x168.jpg 300w"
+                                                srcSet="assets/images/blog/blog-image-6.jpg 750w, assets/images/blog/blog-image-6-600x336.jpg 600w, assets/images/blog/blog-image-6-300x168.jpg 300w"
                                                 sizes="(max-width: 750px) 100vw, 750px" />
                                             <div className="overlay"></div>
                                             <div className="post-category">

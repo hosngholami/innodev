@@ -3,16 +3,7 @@ import { Helmet } from "react-helmet";
 import { useState } from 'react';
 export const Header = () => {
 
-  const title = "خرید آنلاین"
-  const [name, setName] = useState("")
-  const [isValidForm, setIsValidForm] = useState(false)
-  const setNameValue = (event) => {
-      setName(event.target.value)
-  }
 
-  const checkValidForm = () => {
-
-  }
   return (
     <>
       <header className="main-header header header_v13">
@@ -22,7 +13,7 @@ export const Header = () => {
               <div className="top_left">
                 <ul className="top-links clearfix">
                   <li>
-                    <a href="home-13.html#" className="get_a_quote">{title}</a>
+                    <a href="home-13.html#" className="get_a_quote">درخواست مشاوره</a>
                   </li>
                   <li>به شرکت مشاوره ما خوش آمدید.</li>
                 </ul>
@@ -497,9 +488,8 @@ export const Header = () => {
                   <form className="contact-form" method="post" action="sendemail.php">
                     <p>
                       <label> نام شما<br />
-                        <input type="text" name="name"  size="40" onChange={setNameValue}
+                        <input type="text" name="name"  size="40"
                           placeholder="نام خود را وارد کنید" />
-                          <p>{name}</p>
                         <br />
                         <i className="fa fa-user"></i><br />
                       </label>
@@ -527,9 +517,7 @@ export const Header = () => {
                         <i className="fa fa-comments"></i><br />
                       </label>
                     </p>
-                    <p><input type="button" disabled={isValidFormpppp
-                      
-                    }  value="ارسال" /></p>
+                    <p><input type="button" value="ارسال" /></p>
 
                   </form>
 
