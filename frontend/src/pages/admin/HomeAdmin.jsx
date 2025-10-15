@@ -1,6 +1,6 @@
 export const HomeAdmin = () => {
     return (
-        <>
+     
             <div className="content-wrapper">
                 <section className="content-header">
                     <h1>
@@ -468,6 +468,5 @@ export const HomeAdmin = () => {
 
                 </section>
             </div>
-        </>
     )
 }

@@ -23,7 +23,7 @@ export const HeaderAdmin = () => {
                                         <li>
                                             <a href="#">
                                                 <div class="pull-right">
-                                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                                    <img src="src/assets/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                                                 </div>
                                                 <h4>
                                                     علیرضا
@@ -35,7 +35,7 @@ export const HeaderAdmin = () => {
                                         <li>
                                             <a href="#">
                                                 <div class="pull-right">
-                                                    <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image" />
+                                                    <img src="src/assets/admin/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image" />
                                                 </div>
                                                 <h4>
                                                     نگین
@@ -47,7 +47,7 @@ export const HeaderAdmin = () => {
                                         <li>
                                             <a href="#">
                                                 <div class="pull-right">
-                                                    <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image" />
+                                                    <img src="src/assets/admin/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image" />
                                                 </div>
                                                 <h4>
                                                     نسترن
@@ -59,7 +59,7 @@ export const HeaderAdmin = () => {
                                         <li>
                                             <a href="#">
                                                 <div class="pull-right">
-                                                    <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image" />
+                                                    <img src='src/assets/admin/dist/img/user3-128x128.jpg' class="img-circle" alt="User Image" />
                                                 </div>
                                                 <h4>
                                                     نگین
@@ -71,7 +71,7 @@ export const HeaderAdmin = () => {
                                         <li>
                                             <a href="#">
                                                 <div class="pull-right">
-                                                    <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image" />
+                                                    <img src="src/assets/admin/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image" />
                                                 </div>
                                                 <h4>
                                                     نسترن
@@ -199,12 +199,12 @@ export const HeaderAdmin = () => {
                         </li>
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
+                                <img src="src/assets/admin/dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
                                 <span class="hidden-xs">علیرضا حسینی زاده</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="user-header">
-                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                    <img src="src/assets/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
 
                                     <p>
                                         علیرضا حسینی زاده

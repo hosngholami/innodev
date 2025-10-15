@@ -3,6 +3,7 @@ import { AdminLayout } from '../layout/AdminLayout'
 import { MainLayout } from '../layout/MainLayout'
 import { HomeAdmin } from '../pages/admin/HomeAdmin'
 import { AboutUsAdmin } from '../pages/admin/AboutUsAdmin'
+import { ServiceAdmin} from '../pages/admin/ServiceAdmin'
 import { Home } from '../pages/home/Home'
 export const router = createBrowserRouter([
     {
@@ -14,6 +15,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: "aboutus", element:<AboutUsAdmin />
+            },
+            {
+                path: "service", element:<ServiceAdmin />
             }
         ]
     },

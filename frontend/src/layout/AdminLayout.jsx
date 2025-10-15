@@ -2,15 +2,15 @@ import { Outlet } from "react-router-dom"
 
 import '../assets/admin/dist/css/bootstrap-theme.css';
 import '../assets/admin/dist/css/rtl.css';
-// import '../assets/admin/dist/css/persian-datepicker-0.4.5.min';
+// import '../assets/admin/dist/css/persian-datepicker-0.4.5.min.js';
 import '../assets/admin/bower_components/font-awesome/css/font-awesome.min.css';
 import '../assets/admin/bower_components/Ionicons/css/ionicons.min.css';
 import '../assets/admin/dist/css/AdminLTE.css';
 import '../assets/admin/dist/css/skins/_all-skins.min.css';
 import '../assets/admin/bower_components/morris.js/morris.css';
 import '../assets/admin/bower_components/jvectormap/jquery-jvectormap.css';
-// import '../assets/admin/bower_components/bootstrap-daterangepicker/daterangepicker.css';
-// import '../assets/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css';
+import '../assets/admin/bower_components/bootstrap-daterangepicker/daterangepicker.css';
+import '../assets/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css';
 
 
 import '../assets/admin/bower_components/jquery/dist/jquery.min.js'
@@ -19,8 +19,8 @@ import '../assets/admin/bower_components/bootstrap/dist/js/bootstrap.min.js'
 // import '../assets/admin/bower_components/raphael/raphael.min.js'
 import '../assets/admin/bower_components/morris.js/morris.min.js'
 import '../assets/admin/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js'
-// import '../assets/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'
-// import '../assets/admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'
+import '../assets/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'
+import '../assets/admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'
 import '../assets/admin/bower_components/jquery-knob/dist/jquery.knob.min.js'
 // import '../assets/admin/bower_components/moment/min/moment.min.js'
 // import '../assets/admin/bower_components/bootstrap-daterangepicker/daterangepicker.js'
@@ -37,12 +37,15 @@ import { SidebarAdmin } from '../components/admin/SidebarAdmin.jsx'
 import { FooterAdmin } from '../components/admin/FooterAdmin.jsx'
 
 export const AdminLayout = () => {
-    return(
-        <div>
-            <HeaderAdmin />
-            <SidebarAdmin />
-            <Outlet />
-            <FooterAdmin />
+    return (
+        <div className="hold-transition skin-blue sidebar-mini">
+            <div className="wrapper">
+           <HeaderAdmin />
+                <SidebarAdmin />
+                <Outlet />
+                <FooterAdmin />
+            </div>
+     
         </div>
     )
 
