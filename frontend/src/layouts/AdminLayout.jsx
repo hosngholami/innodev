@@ -1,11 +1,17 @@
-import { Outlet } from "react-router-dom";
 import { Header } from '../components/admin/Header'
+import { Sidebar } from '../components/admin/Sidebar'
+import { Footer } from "../components/admin/Footer";
+import { Outlet } from "react-router-dom";
+
 export const AdminLayout = () => {
   return (
-    <div>
+    <>
       <Header />
-      <Outlet /> {/* محتوا صفحات */}
+      <Sidebar />
+      <Outlet />
+      <Footer />
+    </>
+
       
-    </div>
   );
 }

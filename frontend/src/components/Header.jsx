@@ -1,9 +1,4 @@
-import { Link } from 'react-router-dom'
-import { Helmet } from "react-helmet";
-import { useState } from 'react';
 export const Header = () => {
-
-
   return (
     <div class="header_area" id="header_contents">
       <header className="main-header header header_v13">
