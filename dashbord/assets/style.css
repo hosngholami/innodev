@@ -1,0 +1,13 @@
+ @import './libs/bootstrap/css/bootstrap.rtl.min.css';
+ @import './css/styles.css';
+ @import './css/icons.css';
+ @import './libs/node-waves/waves.min.css';
+ @import './libs/simplebar/simplebar.min.css';
+ @import './libs/flatpickr/flatpickr.min.css';
+ @import './libs/@simonwep/pickr/themes/nano.min.css';
+ @import './libs/choices.js/public/assets/styles/choices.min.css';
+ @import './libs/flatpickr/flatpickr.min.css';
+ @import './libs/@tarekraafat/autocomplete.js/css/autoComplete.css';
+ @import './libs/flatpickr/flatpickr.min.css';
+ @import './css/persianDatepicker-default.css'
+      
