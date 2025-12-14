@@ -32,7 +32,7 @@
                                         <h6 class="fw-medium mb-0">دسته‌بندی‌ها</h6>
                                         <div class="py-3 pb-0">
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="c-1" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="c-1" >
                                                 <label class="form-check-label" for="c-1">
                                                     توسعه نرم‌افزار
                                                 </label>
@@ -46,14 +46,14 @@
                                                 <span class="badge bg-light text-default fw-500 float-end">۷۸۰</span>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="c-3" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="c-3" >
                                                 <label class="form-check-label" for="c-3">
                                                     بازاریابی
                                                 </label>
                                                 <span class="badge bg-light text-default fw-500 float-end">۱۵,۵۰۰</span>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="c-4" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="c-4" >
                                                 <label class="form-check-label" for="c-4">
                                                     خدمات مشتریان
                                                 </label>
@@ -89,7 +89,7 @@
                                         <h6 class="fw-medium mb-0">دسترسی</h6>
                                         <div class="py-3 pb-0">
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="available-1" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="available-1" >
                                                 <label class="form-check-label" for="available-1">
                                                     آماده به کار
                                                 </label>
@@ -108,7 +108,7 @@
                                         <h6 class="fw-medium mb-0">قرارداد تعهد</h6>
                                         <div class="py-3 pb-0">
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="bond-1" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="bond-1" >
                                                 <label class="form-check-label" for="bond-1">
                                                     ۱ سال
                                                 </label>
@@ -134,7 +134,7 @@
                                         <h6 class="fw-medium mb-0">زبان‌ها</h6>
                                         <div class="py-3 pb-0">
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="languages-1" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="languages-1" >
                                                 <label class="form-check-label" for="languages-1">
                                                     انگلیسی
                                                 </label>
@@ -153,21 +153,21 @@
                                         <h6 class="fw-medium mb-0">نوع شغل</h6>
                                         <div class="py-3 pb-0">
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="j-1" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="j-1" >
                                                 <label class="form-check-label" for="j-1">
                                                     تمام‌وقت
                                                 </label>
                                                 <span class="badge bg-light text-default fw-500 float-end">۱,۹۲۰</span>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="j-2" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="j-2" >
                                                 <label class="form-check-label" for="j-2">
                                                     پاره‌وقت
                                                 </label>
                                                 <span class="badge bg-light text-default fw-500 float-end">۳,۱۰۰</span>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="j-3" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="j-3" >
                                                 <label class="form-check-label" for="j-3">
                                                     کارآموزی
                                                 </label>
@@ -204,14 +204,14 @@
                                                 <span class="badge bg-light text-default fw-500 float-end">۲۲,۴۵۷</span>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="q-2" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="q-2" >
                                                 <label class="form-check-label" for="q-2">
                                                     دیپلم و بالاتر
                                                 </label>
                                                 <span class="badge bg-light text-default fw-500 float-end">۱۲,۵۶۲</span>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="q-4" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="q-4" >
                                                 <label class="form-check-label" for="q-4">
                                                     دیپلم و کارشناسی
                                                 </label>
@@ -223,7 +223,7 @@
                                         <h6 class="fw-medium mb-0">مهارت‌ها</h6>
                                         <div class="py-3 pb-0">
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input me-2" type="checkbox" value="" id="s-1" checked="">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="s-1" >
                                                 <label class="form-check-label" for="s-1">
                                                     HTML5
                                                 </label>

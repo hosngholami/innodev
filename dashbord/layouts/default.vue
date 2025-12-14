@@ -1004,7 +1004,7 @@
 										<nuxt-link to="/"  class="side-menu__item">تحلیل</nuxt-link>
 									</li>
 									<li class="slide">
-										<a href="index3.html" class="side-menu__item">تجارت الکترونیک</a>
+										<nuxt-link to="/about"  class="side-menu__item">درباره ما</nuxt-link>
 									</li>
 									<li class="slide">
 										<a href="index4.html" class="side-menu__item">مدیریت ارتباط با مشتری</a>
