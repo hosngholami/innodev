@@ -7,7 +7,6 @@ from django.dispatch import receiver
 
 
 
-
 class UserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         if not email:
@@ -23,9 +22,13 @@ class UserManager(BaseUserManager):
         extra_field.setdefault('is_staff', True)
         extra_field.setdefault('is_superuser', True)
         extra_field.setdefault('is_active', True)
-
-
         return self.create_user(email=email, password=password, **extra_field)
+        
+        
+        
+    class Meta:
+        db_table = "UserManager"
+
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -36,6 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # is_verified = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ثبت")
     updated_date = models.DateTimeField(auto_now=True, verbose_name="تاریخ ویرایش")
+
 
 
     USERNAME_FIELD = 'email'
@@ -50,9 +54,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name_plural = "کاربران"
         verbose_name = "کاربر"
+        db_table = "User"
  
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="کاربر")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="کاربر", related_name="profile")
     first_name = models.CharField(max_length=250, verbose_name="نام")
     last_name = models.CharField(max_length=250, verbose_name="نام و نام خانوادگی")
     image = models.ImageField(blank=True, null=True, verbose_name="آدرس تصویر")
@@ -66,4 +71,5 @@ class Profile(models.Model):
     class Meta:
         verbose_name_plural = "پروفایل"
         verbose_name = "پروفایل"
+        db_table = "Profile"
     

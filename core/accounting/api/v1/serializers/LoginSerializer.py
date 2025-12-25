@@ -2,14 +2,16 @@ from rest_framework import serializers
 from accounting.models import User
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
-
 from rest_framework import serializers
+
+
 class LoginSerializer(serializers.Serializer):
     
     email = serializers.EmailField()
     password = serializers.CharField()
 
-class CustomeAuthTokenSerializer(serializers.Serializer):
+
+class AuthTokenSerializer(serializers.Serializer):
     email = serializers.CharField(
         label=_("Email"),
         write_only=True
@@ -28,15 +30,11 @@ class CustomeAuthTokenSerializer(serializers.Serializer):
     def validate(self, attrs):
         username = attrs.get('email')
         password = attrs.get('password')
-      
 
         if username and password:
             user = authenticate(request=self.context.get('request'),
                                 username=username, password=password)
 
-            # The authenticate call simply returns None for is_active=False
-            # users. (Assuming the default ModelBackend authentication
-            # backend.)
             if not user:
                 msg = _('Unable to log in with provided credentials.')
                 raise serializers.ValidationError(msg, code='authorization')

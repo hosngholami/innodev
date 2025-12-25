@@ -22,11 +22,12 @@ class RegisterSerializer(serializers.ModelSerializer):
             validate_password(attr['password'])
         except exceptions.ValidationError as e:
             raise serializers.ValidationError({'password': list(e.messages)})
+        
         return super().validate(attr)
 
-    def create(self, validated_date):
-        validated_date.pop('repeat_password', None)
-        return User.objects.create_user(**validated_date)
+    def create(self, validated_data):
+        validated_data.pop('repeat_password', None)
+        return User.objects.create_user(**validated_data)
 
     class Meta:
         model = User

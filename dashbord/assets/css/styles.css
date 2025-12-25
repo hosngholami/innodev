@@ -23957,6 +23957,16 @@ a.link-underline-dark {
   direction:ltr !important;
 }
 
+.invalid-input {
+  border-color: red;
+}
+.error-feedback {
+  color: red;
+  padding: 2px 2px 0 0;  
+}
+
+
+
 
 
 
