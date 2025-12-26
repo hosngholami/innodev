@@ -6,10 +6,3 @@ from accounting.models import User
 
 class EmailSerializer(serializers.Serializer):
     email = serializers.EmailField()
-        
-        
-        
-
-    
-
-

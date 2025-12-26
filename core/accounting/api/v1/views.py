@@ -7,6 +7,7 @@ from accounting.api.v1.serializers.RegisterSerializer import RegisterSerializer
 from accounting.api.v1.serializers.LoginSerializer import LoginSerializer, AuthTokenSerializer
 from accounting.api.v1.serializers.UserSerializer import UserSerializer
 from accounting.api.v1.serializers.EmailSerializer import EmailSerializer
+from accounting.api.v1.serializers.CheckPasswordSerializer import CheckPasswordSerializer
 from rest_framework.views import APIView
 from django.shortcuts import render
 from rest_framework import status
@@ -77,6 +78,17 @@ class CheckEmailAPIView(GenericAPIView):
             {"detail": isEmailExists},
             status=status.HTTP_200_OK
         )
+        
+        
+        
+class CheckPasswordAPIView(GenericAPIView):
+    serializer_class = CheckPasswordSerializer
+    
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        return Response(serializer.data, status=status.HTTP_200_OK)
         
     
         

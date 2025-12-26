@@ -49,7 +49,7 @@ export default function () {
             return false
         }
 
-        const checkEmail = await axios.post('http://127.0.0.1:8000/accounting/api/v1/email',
+        const checkEmail = await axios.post('http://127.0.0.1:8000/accounting/api/v1/verification-email',
             {
                 email: user.value.email.trim()
             },
@@ -60,11 +60,28 @@ export default function () {
             }
         )
 
-        if(checkEmail.data.detail == true){
+        if (checkEmail.data.detail == true) {
             errors.value = {
                 email: ['ایمیل قبلا در سیستم ثبت شده است.']
             }
             return false
+        }
+
+
+        try {
+            await axios.post(
+                'http://127.0.0.1:8000/accounting/api/v1/verification-password',
+                {
+                    password: user.value.password.trim(),
+                    repeat_password: user.value.repeat_password.trim()
+                }
+            ).then((response) => {
+                console.log(response.data)
+            })
+        } catch (err) {
+            errors.value = {
+                password: [err.response?.data.password]
+            }
         }
         return true
     }

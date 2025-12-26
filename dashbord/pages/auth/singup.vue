@@ -51,12 +51,15 @@
                                     <label for="signup-password" class="form-label text-default">رمز عبور<sup
                                             class="fs-12 text-danger">*</sup></label>
                                     <div class="position-relative">
+                                        {{ errors?.password }}
                                         <input v-model="user.password" type="password"
-                                            :class="errors.password ? 'invalid-input' : ''"
+                                            :class="errors?.password?.length ? 'invalid-input' : ''"
                                             class="form-control create-password-input" id="signup-password"
                                             placeholder="رمز عبور">
-                                        <div v-if="errors.password" class="error-feedback">
-                                            {{ errors.password[0] }}
+                                        <div v-if="errors?.password?.length" class="error-feedback">
+                                            <div v-for="(err, index) in errors.password" :key="index">
+                                                {{ err }}
+                                            </div>
                                         </div>
                                         <a href="javascript:void(0);" class="show-password-button text-muted"
                                             onclick="createpassword('signup-password',this)" id="button-addon2">
