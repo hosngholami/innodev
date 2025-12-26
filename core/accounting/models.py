@@ -25,7 +25,6 @@ class UserManager(BaseUserManager):
         return self.create_user(email=email, password=password, **extra_field)
         
         
-        
     class Meta:
         db_table = "UserManager"
 
@@ -36,15 +35,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True, verbose_name="فعال/غیرفعال")
     is_superuser = models.BooleanField(default=False)
-    # is_verified = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False, verbose_name="وضعیت اعتبارسنجی")
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ثبت")
     updated_date = models.DateTimeField(auto_now=True, verbose_name="تاریخ ویرایش")
-
-
+    
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-
 
     objects = UserManager()
 
@@ -55,6 +52,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "کاربران"
         verbose_name = "کاربر"
         db_table = "User"
+ 
+ 
  
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="کاربر", related_name="profile")
