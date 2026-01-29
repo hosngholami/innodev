@@ -23,8 +23,8 @@ from rest_framework.authentication import TokenAuthentication
 
 class UserAPIView(GenericAPIView):
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
     def get_queryset(self):
         return User.objects.all()
     def get(self, request, *args, **kwargs):
@@ -51,17 +51,19 @@ class LoginAPIView(GenericAPIView):
     
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data, context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-        
+        if(serializer.is_valid()):
+            
+            user = serializer.validated_data['user']
+            token, created = Token.objects.get_or_create(user=user)
+            
 
-        return Response({
-            'token' : token.key,
-            'userId' : user.pk,
-            'email': user.email
-        })
+            return Response({
+                'token' : token.key,
+                'userId' : user.pk,
+                'email': user.email
+            }, status=status.HTTP_200_OK)
+            
+        return Response({'token' : 'user-notfound'}, status=status.HTTP_404_NOT_FOUND)
         
 class CheckEmailAPIView(GenericAPIView):
     serializer_class = EmailSerializer

@@ -5,29 +5,11 @@
                 <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
                     <div class="card custom-card my-4">
                         <div class="card-body p-5">
-                            <div class="mb-4 d-flex justify-content-center">
-                                {{ errors.name }}
-                                <a href="/">
-                                    <img src="/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
-                                    <img src="/images/brand-logos/desktop-white.png" alt="logo" class="desktop-white">
-                                </a>
-                            </div>
+
                             <p class="h5 mb-2 text-center">ثبت نام</p>
                             <p class="mb-4 text-muted op-7 fw-normal text-center">خوش آمدید! با ایجاد حساب کاربری خود
                                 شروع
                                 کنید.</p>
-                            <div class="d-flex mb-3 justify-content-between gap-2 flex-wrap flex-lg-nowrap">
-                                <button
-                                    class="btn btn-lg border d-flex align-items-center justify-content-center flex-fill btn-light">
-                                    <span class="avatar avatar-xs">
-                                        <img src="/images/media/apps/google.png" alt="">
-                                    </span>
-                                    <span class="lh-1 ms-2 fs-13 text-default">ثبت نام با گوگل</span>
-                                </button>
-                            </div>
-                            <div class="text-center my-3 authentication-barrier">
-                                <span>یا</span>
-                            </div>
                             <div class="row gy-3">
                                 <div class="col-xl-12">
                                     <label for="signup-firstname" class="form-label text-default">نام<sup
@@ -51,7 +33,6 @@
                                     <label for="signup-password" class="form-label text-default">رمز عبور<sup
                                             class="fs-12 text-danger">*</sup></label>
                                     <div class="position-relative">
-                                        {{ errors?.password }}
                                         <input v-model="user.password" type="password"
                                             :class="errors?.password?.length ? 'invalid-input' : ''"
                                             class="form-control create-password-input" id="signup-password"
@@ -93,6 +74,7 @@
                                     </div>
                                 </div>
                             </div>
+                           
                             <div class="d-grid mt-4">
                                 <button type="button" @click="validate" class="btn btn-primary">ایجاد حساب
                                     کاربری</button>
@@ -100,17 +82,6 @@
                             <div class="text-center">
                                 <p class="text-muted mt-3 mb-0">قبلاً حساب کاربری دارید؟ <nuxt-link to="/auth/singin"
                                         class="text-primary">ورود</nuxt-link></p>
-                            </div>
-                            <div class="btn-list text-center mt-3">
-                                <button class="btn btn-icon btn-wave btn-primary-light">
-                                    <i class="ri-facebook-line lh-1 align-center fs-17"></i>
-                                </button>
-                                <button class="btn btn-icon btn-wave btn-primary1-light">
-                                    <i class="ri-twitter-x-line lh-1 align-center fs-17"></i>
-                                </button>
-                                <button class="btn btn-icon btn-wave btn-primary2-light">
-                                    <i class="ri-instagram-line lh-1 align-center fs-17"></i>
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -121,11 +92,13 @@
 </template>
 <script setup>
 
-import useRegister from '~/composables/login/useRegister';
+import useRegister from '~/composables/auth/useRegister';
 const { user, errors, validate } = useRegister();
 
+
+
 definePageMeta({
-    layout: false
+    layout: ["auth"]
 })
 
 onMounted(() => {

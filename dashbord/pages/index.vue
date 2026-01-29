@@ -1136,6 +1136,16 @@
 
 <script setup>
 
+
+
+
+
+definePageMeta({
+    middleware: ["auth"]
+})
+
+
+
 onMounted(() => {
 	useHead({
 		script: [

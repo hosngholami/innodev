@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
 export default defineNuxtConfig({
   app: {
     head: {
@@ -8,7 +10,7 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
       link: [
-        
+
       ],
       script: [
         {
@@ -35,7 +37,7 @@ export default defineNuxtConfig({
           src: 'libs/simplebar/simplebar.min.js',
           defer: true
         },
-        
+
         {
           src: 'libs/@tarekraafat/autocomplete.js/autoComplete.min.js',
           defer: true
@@ -86,5 +88,14 @@ export default defineNuxtConfig({
   css: [
     '~/assets/style.css'
   ],
+  modules: ["@pinia/nuxt", "pinia-plugin-persistedstate/nuxt", 'nuxt-auth-utils'],
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
+
+
+
+
+
 
 })

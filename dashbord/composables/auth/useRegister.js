@@ -1,16 +1,21 @@
-import axios from 'axios'
+
 import { ref } from 'vue'
 import Validator from 'validatorjs/dist/validator'
 
 
 export default function () {
+    const userState = useState('userState', () => [] )
+    const router = useRouter();
+
     const errors = ref({})
+    const { $axios } = useNuxtApp()
 
     const user = ref({
         name: "",
         email: "",
         password: "",
-        repeat_password: ""
+        repeat_password: "",
+        verificationCode: 0
     })
 
     const rules = {
@@ -31,6 +36,7 @@ export default function () {
 
     const validate = async () => {
 
+
         errors.value = {}
 
         const validation = new Validator(user.value, rules, messages)
@@ -49,16 +55,9 @@ export default function () {
             return false
         }
 
-        const checkEmail = await axios.post('http://127.0.0.1:8000/accounting/api/v1/verification-email',
-            {
-                email: user.value.email.trim()
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }
-        )
+        const checkEmail = await $axios.post('accounting/api/v1/verification-email', {
+            email: user.value.email.trim()
+        })
 
         if (checkEmail.data.detail == true) {
             errors.value = {
@@ -67,28 +66,33 @@ export default function () {
             return false
         }
 
-
         try {
-            await axios.post(
-                'http://127.0.0.1:8000/accounting/api/v1/verification-password',
-                {
-                    password: user.value.password.trim(),
-                    repeat_password: user.value.repeat_password.trim()
-                }
-            ).then((response) => {
-                console.log(response.data)
+            const response = await $axios.post('accounting/api/v1/verification-password', {
+                password: user.value.password.trim(),
+                repeat_password: user.value.repeat_password.trim(),
             })
+            console.log(response.data)
         } catch (err) {
-            errors.value = {
-                password: [err.response?.data.password]
+            if (err.response?.data?.password) {
+                errors.value = {
+                    password: err.response.data.password
+                }
+            } else {
+                console.error(err)
             }
         }
-        return true
+
+
+        
+        router.push('/auth/verification')
+        
     }
+
 
     return {
         user,
         errors,
         validate
     }
+
 }

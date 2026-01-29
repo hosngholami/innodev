@@ -1108,7 +1108,7 @@
 										href="chat.html"><i
 											class="fe fe-help-circle p-1 rounded-circle bg-primary-transparent set me-2 fs-16"></i>پشتیبانی</a>
 								</li>
-								<li><a class="dropdown-item d-flex align-items-center" href="sign-in-cover.html"><i
+								<li><a class="dropdown-item d-flex align-items-center" href="#" @click="singout"><i
 											class="fe fe-lock p-1 rounded-circle bg-primary-transparent ut me-2 fs-16"></i>خروج</a>
 								</li>
 							</ul>
@@ -1265,7 +1265,7 @@
 									</li>
 									<li class="slide has-sub">
 										<nuxt-link to="/contact" class="side-menu__item">پیام های دریافتی</nuxt-link>
-										
+
 									</li>
 								</ul>
 							</li>
@@ -2062,3 +2062,9 @@
 		<!-- Scroll To Top -->
 	</div>
 </template>
+
+<script setup>
+
+
+
+</script>

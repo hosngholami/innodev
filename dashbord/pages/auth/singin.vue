@@ -1,4 +1,5 @@
 <template>
+
     <body class="authentication-background">
 
         <div class="container">
@@ -6,12 +7,7 @@
                 <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
                     <div class="card custom-card my-4">
                         <div class="card-body p-5">
-                            <div class="mb-3 d-flex justify-content-center">
-                                <a href="index.html">
-                                    <img src="/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
-                                    <img src="/images/brand-logos/desktop-white.png" alt="logo" class="desktop-white">
-                                </a>
-                            </div>
+                           
                             <p class="h5 mb-2 text-center">ورود</p>
                             <p class="mb-4 text-muted op-7 fw-normal text-center">خوش برگشتی محسن!</p>
                             <div class="d-flex mb-3 justify-content-between gap-2 flex-wrap flex-lg-nowrap">
@@ -36,8 +32,8 @@
                                 <div class="col-xl-12 mb-2">
                                     <label for="signin-password" class="form-label text-default d-block">
                                         رمز عبور<sup class="fs-12 text-danger">*</sup>
-                                        <a href="reset-password-basic.html"
-                                            class="float-end fw-normal text-muted">فراموشی رمز عبور؟</a>
+                                        <nuxt-link to="/auth/rest-password"
+                                            class="float-end fw-normal text-muted">فراموشی رمز عبور؟</nuxt-link>
                                     </label>
                                     <div class="position-relative">
                                         <input v-model="form.password" type="password"
@@ -57,25 +53,22 @@
                                     </div>
                                 </div>
                             </div>
+                             <br />
+                            <div v-if="status.error" class="alert alert-danger" role="alert">
+                                {{ status.error }}
+                                
+                            </div>
+                            <div v-if="status.success" class="alert alert-success" role="alert">
+                               {{ status.success }}
+                            </div>
                             <div class="d-grid mt-4">
-                                <button type="button" @click="onLogin" class="btn btn-primary">ورود</button>
+                                <button type="button" @click="authentication" class="btn btn-primary">ورود</button>
                             </div>
                             <div class="text-center">
                                 <p class="text-muted mt-3 mb-0">حساب کاربری ندارید؟ <nuxt-link to="/auth/singup"
                                         class="text-primary">ثبت نام</nuxt-link></p>
                             </div>
 
-                            <div class="btn-list text-center mt-3">
-                                <button class="btn btn-icon btn-wave btn-primary-light">
-                                    <i class="ri-facebook-line lh-1 align-center fs-17"></i>
-                                </button>
-                                <button class="btn btn-icon btn-wave btn-primary1-light">
-                                    <i class="ri-twitter-x-line lh-1 align-center fs-17"></i>
-                                </button>
-                                <button class="btn btn-icon btn-wave btn-primary2-light">
-                                    <i class="ri-instagram-line lh-1 align-center fs-17"></i>
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,31 +79,13 @@
 
 <script setup>
 
-import axios from 'axios';
-import { ref } from 'vue';
+import useLogin from '~/composables/auth/useLogin';
 
-
-const form = reactive({
-    email: "",
-    password: ""
-})
-
-
-
-async function onLogin() {
-    const response = await axios.post('http://127.0.0.1:8000/accounting/api/v1/login',
-        form,
-        {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-    console.log(`token=${response.data.token}`)
-}
+const { form, status, authentication } = useLogin();
 
 
 definePageMeta({
-    layout: false
+    layout: ["auth"]
 })
 
 onMounted(() => {

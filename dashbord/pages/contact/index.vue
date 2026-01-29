@@ -1,5 +1,8 @@
 <script setup>
-import axios from "axios";
+
+definePageMeta({
+    middleware: []
+})
 </script>
 
 
@@ -77,7 +80,7 @@ import axios from "axios";
                                             <i class="ri-checkbox-circle-line align-middle fs-14 text-primary"></i>
                                         </span>
                                         <span class="flex-fill text-nowrap">
-                                             پشتیبانی
+                                            پشتیبانی
                                         </span>
                                         <span class="badge bg-primary1-transparent rounded-pill">12</span>
                                     </div>
