@@ -1,9 +1,6 @@
 <template>
-
     <div class="authentication-background">
-
-
-        <div class="container-lg">
+        <div class="container-lg" style="direction: rtl;">
             <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
                 <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
                     <div class="card custom-card my-4">
@@ -89,7 +86,7 @@
 
 
 definePageMeta({
-    layout: false
+    layout: ["auth"]
 })
 
 onMounted(() => {

@@ -6,7 +6,7 @@
             <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
                 <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
                     <div class="card custom-card my-4">
-                        <div class="card-body p-5">
+                        <div class="card-body p-5" style="direction: rtl;">
                            
                             <p class="h5 mb-2 text-center">ورود</p>
                             <p class="mb-4 text-muted op-7 fw-normal text-center">خوش برگشتی محسن!</p>

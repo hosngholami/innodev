@@ -78,7 +78,7 @@ const { code, user, verify } = useVerfication()
 
 
 definePageMeta({
-    layout: false
+    layout: ["auth"]
 })
 
 onMounted(() => {
