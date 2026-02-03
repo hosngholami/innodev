@@ -54,13 +54,11 @@
                                 </div>
                             </div>
                              <br />
-                            <div v-if="status.error" class="alert alert-danger" role="alert">
-                                {{ status.error }}
+                            <div v-if="errors.auth" class="alert alert-danger" role="alert">
+                                {{ errors.auth[0] }}
                                 
                             </div>
-                            <div v-if="status.success" class="alert alert-success" role="alert">
-                               {{ status.success }}
-                            </div>
+                       
                             <div class="d-grid mt-4">
                                 <button type="button" @click="authentication" class="btn btn-primary">ورود</button>
                             </div>
@@ -81,7 +79,7 @@
 
 import useLogin from '~/composables/auth/useLogin';
 
-const { form, status, authentication } = useLogin();
+const { form, errors, authentication } = useLogin();
 
 
 definePageMeta({
