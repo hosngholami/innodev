@@ -63,7 +63,7 @@
                                 <button type="button" @click="authentication" class="btn btn-primary">ورود</button>
                             </div>
                             <div class="text-center">
-                                <p class="text-muted mt-3 mb-0">حساب کاربری ندارید؟ <nuxt-link to="/auth/singup"
+                                <p class="text-muted mt-3 mb-0">حساب کاربری ندارید؟ <nuxt-link to="/auth/signup"
                                         class="text-primary">ثبت نام</nuxt-link></p>
                             </div>
 

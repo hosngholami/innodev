@@ -64,7 +64,7 @@
                             </div>
                             <div class="text-center">
                                 <p class="text-muted mt-3">رمز عبور خود را به خاطر آورده‌اید؟ <nuxt-link
-                                        to="/auth/singin" class="text-primary">ورود</nuxt-link></p>
+                                        to="/auth/signin" class="text-primary">ورود</nuxt-link></p>
                             </div>
 
                         </div>

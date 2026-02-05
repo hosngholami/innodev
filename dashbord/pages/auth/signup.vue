@@ -80,7 +80,7 @@
                                     کاربری</button>
                             </div>
                             <div class="text-center">
-                                <p class="text-muted mt-3 mb-0">قبلاً حساب کاربری دارید؟ <nuxt-link to="/auth/singin"
+                                <p class="text-muted mt-3 mb-0">قبلاً حساب کاربری دارید؟ <nuxt-link to="/auth/signin"
                                         class="text-primary">ورود</nuxt-link></p>
                             </div>
                         </div>

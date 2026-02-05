@@ -8,30 +8,10 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
-    // موقع لاگین موفق
     setToken(newToken: string, userData: any) {
       this.token = newToken
       this.user = userData
       this.isAuthenticated = true
-
-      // ذخیره در localStorage
-      if (process.client) {
-        localStorage.setItem('token', newToken)
-        
-      }
-    },
-
-    // موقع لود اپ یا رفرش
-    loadFromStorage() {
-      if (process.client) {
-        const storedToken = localStorage.getItem('token')
-
-        if (storedToken) {
-          this.token = storedToken
-          this.isAuthenticated = true
-        }
-
-      }
     },
 
     logout() {
@@ -40,10 +20,10 @@ export const useAuthStore = defineStore('auth', {
       this.isAuthenticated = false
 
       if (process.client) {
-        localStorage.removeItem('token')
+        const tokenCookie = useCookie('auth_token')
+        tokenCookie.value = null
+        navigateTo('/auth/signin')
       }
-
-      navigateTo('/auth/singin')
     }
   }
 })

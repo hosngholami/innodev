@@ -35,37 +35,14 @@ export const useAuthStore = defineStore('auth', {
 
     },
 
-    // این متد حتماً باید وجود داشته باشد
-    loadFromStorage() {
-      if (process.client) {
-        const storedToken = localStorage.getItem('auth_token')
-        const storedUser = localStorage.getItem('auth_user')
 
-        if (storedToken) {
-          this.token = storedToken
-          this.isAuthenticated = true
-        }
-
-        if (storedUser) {
-          try {
-            this.user = JSON.parse(storedUser)
-          } catch {
-            console.warn('خطا در parse کردن کاربر از localStorage')
-          }
-        }
-      }
-    },
 
     logout() {
-      this.token = null
-      this.user = null
-      this.isAuthenticated = false
 
       if (process.client) {
-        localStorage.removeItem('auth_token')
-        localStorage.removeItem('auth_user')
+        const tokenCookie = useCookie('auth_token')
+        tokenCookie.value = null
       }
-
       navigateTo('/auth/signin')
     }
   }

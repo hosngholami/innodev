@@ -1,3 +1,14 @@
+<script setup>
+import { useAuthStore } from '~/composables/auth/useAuth'
+
+async function signout() {
+	const authStore = useAuthStore()
+	await authStore.logout()
+}
+
+
+
+</script>
 <template>
 	<div class="">
 
@@ -1108,8 +1119,8 @@
 										href="chat.html"><i
 											class="fe fe-help-circle p-1 rounded-circle bg-primary-transparent set me-2 fs-16"></i>پشتیبانی</a>
 								</li>
-								<li><a class="dropdown-item d-flex align-items-center" href="#" @click="singout"><i
-											class="fe fe-lock p-1 rounded-circle bg-primary-transparent ut me-2 fs-16"></i>خروج</a>
+								<li><button class="dropdown-item d-flex align-items-center" @click="signout"><i
+											class="fe fe-lock p-1 rounded-circle bg-primary-transparent ut me-2 fs-16"></i>خروج</button>
 								</li>
 							</ul>
 						</li>

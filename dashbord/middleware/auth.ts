@@ -13,7 +13,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
     if (authStore.token == null) {
         return navigateTo({
-            path: '/auth/singin',
+            path: '/auth/signin',
             query: { redirect: to.fullPath }
         })
     }
