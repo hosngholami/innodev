@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('auth', {
           httpOnly: false,                // اگر true کنی → store.token روی کلاینت null می‌شه (امن‌تر)
           sameSite: 'lax'
         })
-        tokenCookie.value = newToken
+        tokenCookie.value = userData
       }
     },
     getToken() {

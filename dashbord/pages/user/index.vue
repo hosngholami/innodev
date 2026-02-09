@@ -76,7 +76,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="crm-contact contacts-list" v-for="user in userList">
+                                <tr class="crm-contact contacts-list" v-for="user in users">
                                     <User :id="user.id" :email="user.email" :name="user.name" :phone="user.phone"
                                         :updated_date="user.updated_date" :created_date="user.created_date" />
                                 </tr>
@@ -379,11 +379,16 @@
 
 <script setup>
 
-import axios from 'axios';
-import { onMounted, ref } from 'vue'
-import User from '@/components/User'
 
-const userList = ref({})
+
+import User from '@/components/User'
+import useUser from '~/composables/user/useUser';
+const { users, loading, error, fetchUsers } = useUser()
+
+onMounted(() => {
+    fetchUsers()
+})
+
 
 
 definePageMeta({
@@ -391,16 +396,6 @@ definePageMeta({
 })
 
 
-onMounted(async () => {
-    try {
-        const response = await axios.get(
-            'http://127.0.0.1:8000/accounting/api/v1/user'
-        )
-        console.log(response.data)
-        userList.value = response.data
-        console.log(userList.value)
-    } catch (error) {
-        console.error(error)
-    }
-})
+
+
 </script>
