@@ -18,6 +18,7 @@ from rest_framework.generics import GenericAPIView, UpdateAPIView
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.views import APIView 
 
 
 
@@ -91,6 +92,14 @@ class CheckPasswordAPIView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+class LogoutAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
         
     
         

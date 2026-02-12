@@ -1,19 +1,11 @@
 <script setup>
-import { useAuthStore } from '~/composables/auth/useAuth'
+import useSignout from '~/composables/auth/useSignout'
 
-async function signout() {
-	const authStore = useAuthStore()
-	await authStore.logout()
-}
-
-
-
+const { signout } = useSignout();
 </script>
 <template>
 	<div class="">
-
 		<!-- Switcher -->
-
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="switcher-canvas" aria-labelledby="offcanvasRightLabel">
 			<div class="offcanvas-header border-bottom d-block p-0">
 				<div class="d-flex align-items-center justify-content-between p-3">
@@ -2074,8 +2066,3 @@ async function signout() {
 	</div>
 </template>
 
-<script setup>
-
-
-
-</script>

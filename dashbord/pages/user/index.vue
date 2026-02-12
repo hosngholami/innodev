@@ -26,11 +26,11 @@
 
     <!-- Start::row-1 -->
     <div class="row">
-        <div class="col-xl-12">
-            <div class="card custom-card">
+        <div class="col-xl-12 placeholder-glow">
+            <div class="card custom-card" :class="[loading == true ? 'placeholder' : '']">
                 <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-3">
                     <div class="card-title">
-                        کاربران<span class="badge bg-primary rounded ms-2 fs-12 align-middle">28</span>
+                        کاربران<span class="badge bg-primary rounded ms-2 fs-12 align-middle placeholder-wave">28</span>
                     </div>
                     <div class="d-flex flex-wrap gap-2">
                         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#create-contact">

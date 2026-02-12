@@ -2,6 +2,8 @@ from rest_framework import serializers
 from accounting.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
+
+
 class RegisterSerializer(serializers.ModelSerializer):
 
     repeat_password = serializers.CharField(
