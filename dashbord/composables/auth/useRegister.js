@@ -10,6 +10,8 @@ export default function () {
     const errors = ref({})
     const { $axios } = useNuxtApp()
 
+
+
     const user = ref({
         name: "",
         email: "",

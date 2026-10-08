@@ -20,7 +20,6 @@ export default function () {
 
         try {
             const response = await $axios.post('accounting/api/v1/login', form)
-            console.log(response.data.token)
             await authStore.setToken("token", response.data.token)
 
             const link = document.createElement('a')

@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+// import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 export default defineNuxtConfig({
   app: {
@@ -10,7 +10,7 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
       link: [
-        
+
       ],
       script: [
         {
@@ -78,7 +78,52 @@ export default defineNuxtConfig({
           src: 'https://code.jquery.com/jquery-3.7.1.min.js',
           integrity: 'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=',
           crossorigin: 'anonymous'
-        }
+        },
+
+        {
+          src: 'libs/quill/quill.js',
+          defer: true
+        },
+        {
+          src: 'libs/filepond/filepond.min.js',
+          defer: true
+        },
+        {
+          src: 'libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js',
+          defer: true
+        },
+        {
+          src: 'libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js',
+          defer: true
+        },
+        {
+          src: 'libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js',
+          defer: true
+        },
+        {
+          src: 'libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js',
+          defer: true
+        },
+        {
+          src: 'libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.j',
+          defer: true
+        },
+        {
+          src: 'libs/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js',
+          defer: true
+        },
+        {
+          src: 'libs/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js',
+          defer: true
+        },
+        {
+          src: 'libs/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js',
+          defer: true
+        },
+        {
+          src: 'libs/filepond-plugin-image-transform/filepond-plugin-image-transform.min.js',
+          defer: true
+        },
 
       ]
     }

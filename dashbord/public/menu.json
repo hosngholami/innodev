@@ -1,0 +1,24 @@
+[
+  {
+    "label": "داشبوردها",
+    "icon": "ri-home-2-line",
+    "isParent": true,
+    "level": 1,
+    "children": [
+      {
+        "label": "فروش",
+        "to": "/product"
+      },
+      {
+        "label": "تحلیل",
+        "to": "/"
+      },
+      {
+        "label": "درباره ما",
+        "to": "/about",
+        "level": 2
+      }
+    ]
+  }
+ 
+]

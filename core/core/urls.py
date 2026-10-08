@@ -9,7 +9,8 @@ urlpatterns = [
     path('accounting/', include("accounting.urls")),
     path('contactus/', include('contactus.urls')),
     path('aboutus/', include('aboutus.urls')),
-    path('blog/', include('blog.urls'))
+    path('blog/', include('blog.urls')),
+    path('setting/', include('setting.urls')),
 ]
 
 

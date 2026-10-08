@@ -241,3 +241,6 @@ class ServiceAPIView(GenericAPIView):
             return Response({'detail': "حذف با خطا مواجه شد."}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({'detail': 'حذف با موفقیت انجام شد.'}, status=status.HTTP_204_NO_CONTENT)
+
+
+

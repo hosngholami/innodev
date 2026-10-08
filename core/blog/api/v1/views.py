@@ -8,19 +8,25 @@ from blog.api.v1.serializers.CategorySerializer import CategorySerializer
 from blog.models import *
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.views import APIView
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class CategoryAPIView(GenericAPIView):
     serializer_class = CategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['title', 'status']
+    
 
     def get(self, request, *args, **kwargs):
         if(self.kwargs.get('id')):
             id = self.kwargs.get('id')
             queryset = Category.objects.filter(id=id).first()
+            queryset = self.filter_backends(queryset=queryset)
             serializer = self.serializer_class(queryset)
         else:
             queryset = Category.objects.all()
-            serializer = self.serializer_class(queryset, many=True)
+            queryset = self.filter_queryset(queryset=queryset)
+            serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
     
     def post(self, request, *args, **kwargs):

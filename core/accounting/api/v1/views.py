@@ -28,10 +28,19 @@ class UserAPIView(GenericAPIView):
     authentication_classes = [TokenAuthentication]
     def get_queryset(self):
         return User.objects.all()
+    
+    
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
+    
+    def delete(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        userID = serializer._validated_data["id"]
+        user = User.objects.get(id=userID)
+        
+        return Response(user, status=status.HTTP_200_OK)
 
 
 
@@ -56,7 +65,6 @@ class LoginAPIView(GenericAPIView):
             
             user = serializer.validated_data['user']
             token, created = Token.objects.get_or_create(user=user)
-            
 
             return Response({
                 'token' : token.key,
@@ -65,6 +73,9 @@ class LoginAPIView(GenericAPIView):
             }, status=status.HTTP_200_OK)
             
         return Response({'token' : 'user-notfound'}, status=status.HTTP_404_NOT_FOUND)
+        
+        
+        
         
 class CheckEmailAPIView(GenericAPIView):
     serializer_class = EmailSerializer
@@ -76,6 +87,8 @@ class CheckEmailAPIView(GenericAPIView):
         email = serializer._validated_data['email']
         
         isEmailExists = User.objects.filter(email=email).exists()
+        
+        
 
         return Response(
             {"detail": isEmailExists},
@@ -100,7 +113,21 @@ class LogoutAPIView(APIView):
     def post(self, request):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-        
     
-        
-        
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+    
+    
+
+
+
+

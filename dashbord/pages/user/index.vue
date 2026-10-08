@@ -78,7 +78,7 @@
                             <tbody>
                                 <tr class="crm-contact contacts-list" v-for="user in users">
                                     <User :id="user.id" :email="user.email" :name="user.name" :phone="user.phone"
-                                        :updated_date="user.updated_date" :created_date="user.created_date" />
+                                        :updated_date="user.updated_date" :created_date="user.created_date", @delete-user="deleteUser" />
                                 </tr>
                             </tbody>
                         </table>
@@ -383,7 +383,7 @@
 
 import User from '@/components/User'
 import useUser from '~/composables/user/useUser';
-const { users, loading, error, fetchUsers } = useUser()
+const { users, loading, error, fetchUsers, deleteUser } = useUser()
 
 onMounted(() => {
     fetchUsers()

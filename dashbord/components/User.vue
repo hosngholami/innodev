@@ -59,16 +59,21 @@
     <td>
         {{ created_date }}
     </td>
-     <td>
+    <td>
         {{ updated_date }}
     </td>
     <td>
         <div class="btn-list">
             <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"
-                class="btn btn-sm btn-primary-light btn-icon"><i class="ri-eye-line"></i></a>
-            <button class="btn btn-sm btn-info-light btn-icon"><i class="ri-pencil-line"></i></button>
-            <button class="btn btn-sm btn-primary2-light btn-icon contact-delete"><i
-                    class="ri-delete-bin-line"></i></button>
+                class="btn btn-sm btn-primary-light btn-icon">
+                <i class="ri-eye-line"></i>
+            </a>
+            <nuxt-link :to="`/authorization/${id}`" class="btn btn-sm btn-info-light btn-icon">
+                <i class="ri-pencil-line"></i>
+            </nuxt-link>
+            <button @click="$emit('delete-user', id)" type="button" class="btn btn-sm btn-primary2-light btn-icon contact-delete">
+                <i class="ri-delete-bin-line"></i>
+            </button>
         </div>
     </td>
 
@@ -78,6 +83,8 @@
 
 
 <script>
+
+
 export default {
 
     name: 'User',
@@ -122,7 +129,8 @@ export default {
             type: String,
             required: true
         }
-        
+      
     }
+    
 }
 </script>

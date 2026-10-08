@@ -1,4 +1,6 @@
 import { useAuthStore } from '~/composables/auth/useAuth'
+
+
 export default function () {
     const { $axios } = useNuxtApp()
     const signout = async () => {
