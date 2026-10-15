@@ -4,7 +4,7 @@ from django.db import models
 class CategoryMenu(models.Model):
     title = models.CharField(verbose_name="عنوان دسته بندی", max_length=30, null=False, blank=False)
     priority = models.IntegerField(verbose_name="اولویت", null=True, blank=True)
-    status = models.BooleanField(verbose_name="وضعیت", default=True)
+    status = models.IntegerField(verbose_name="وضعیت", default=1, blank=True, null=True)
 
     class Meta:
          db_table = "CategoryMenu"

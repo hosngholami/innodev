@@ -15,6 +15,8 @@ export default function () {
     const count = ref(0)
     const currentPageCount = ref(0)
     const selectedCategoryId = ref(null)
+    const filterSate = ref(false)
+    const sortedState = ref('')
 
     const form = ref({
         id: -1,
@@ -51,48 +53,95 @@ export default function () {
     const getCategoryList = async () => {
         loading.value = true
         errors.value = {}
-        clearForm()
+
+        if (filterSate.value == false) {
+            clearForm()
+        }
+
+        const params = {
+            page: currentPage.value,
+        }
+
+        if(sortedState.value != null){
+                params.ordering = '-' + sortedState.value
+        }
+
+
+        if(form.value.title?.trim()){
+             params.search = form.value.title
+        }
+        if(form.value.status != -1){
+            params.status = form.value.status
+        }
+
+        if(form.value.priority != 0) {
+            params.priority = form.value.priority
+        }
 
         try {
-            const response = (await $axios.get('/setting/api/v1/category', {
-                params: {
-                    page: currentPage.value,
-                    title: form.value.title,
-                    status: form.value.status === -1 ? null : form.value.status
-                }
-            }))
-            nextPageState.value = response.data.next
-            PreviousPageState.value = response.data.previous
-            categoryList.value = response.data.results
-            count.value = response.data.count
-            currentPageCount.value = response.data.current_page_count
-
-
-            
-
-
+            const response = (await $axios.get('/setting/api/v1/category', {params }))
+            nextPageState.value = response.data.next;
+            PreviousPageState.value = response.data.previous;
+            categoryList.value = response.data.results;
+            count.value = response.data.count;
+            currentPageCount.value = response.data.current_page_count;
         }
         catch (error) {
-            errors.value = error
+            errors.value = error;
         }
         finally {
-            loading.value = false
-           
-        }
-
-         
+            loading.value = false;
+        };
     }
 
     const nextPage = async () => {
         currentPage.value += 1
-        await getCategoryList(currentPage.value)
+        await getCategoryList()
     }
 
     const PreviousPage = async () => {
         currentPage.value -= 1
-
-        await getCategoryList(currentPage.value)
+        await getCategoryList()
     }
+
+
+   
+
+    const updateForm = async (id) => {
+
+        selectedCategoryId.value = id
+
+        const response = (await $axios.get('/setting/api/v1/category', {
+            params: {
+                id: selectedCategoryId.value
+            }
+        })).data
+
+
+        form.value.title = response.title
+        form.value.priority = response.priority
+        form.value.status = response.status
+    }
+
+
+
+    const update = async () => {
+        form.value.id = selectedCategoryId
+        const response = (await $axios.put('/setting/api/v1/category/', form.value)).data
+        await getCategoryList()
+        clearForm()
+        const modalElement = document.getElementById('update-category-menu')
+        const modal = bootstrap.Modal.getInstance(modalElement)
+
+        modal?.hide()
+
+    }
+
+
+   const sorted = async () => {
+            await getCategoryList()
+   }
+
 
     const addCategory = async () => {
 
@@ -122,15 +171,15 @@ export default function () {
         const modal = bootstrap.Modal.getInstance(modalElement)
 
         modal?.hide()
-
-        await getCategoryList(currentPage.value)
+        filterSate.value = false
+        await getCategoryList()
         clearForm()
     }
 
     const search = async () => {
         currentPage.value = 1
-
-        await getCategoryList(currentPage.value)
+        filterSate.value = true
+        await getCategoryList()
         const modalElement = document.getElementById('search-category-menu')
         const modal = bootstrap.Modal.getInstance(modalElement)
 
@@ -140,11 +189,9 @@ export default function () {
     const deleteCategory = async () => {
 
         if (!selectedCategoryId.value) {
-            return
+            return;
         }
 
-
-        console.log(selectedCategoryId)
         try {
             const response = await $axios.delete('/setting/api/v1/category/', {
                 data: {
@@ -160,23 +207,17 @@ export default function () {
                 currentPage.value -= 1
             }
 
-            if(currentPage.value == 0){
-                currentPage.value = 1
-                clearForm()
+            if (currentPage.value == 0) {
+                currentPage.value = 1;
             }
+            await getCategoryList();
+            clearForm();
 
-            console.log(currentPageCount.value)
-
-            await getCategoryList(currentPage.value)
         }
         catch (error) {
         }
         finally {
         }
-
-
-
-
     }
 
     return {
@@ -196,6 +237,10 @@ export default function () {
         deleteCategory,
         selectedCategoryId,
         search,
+        updateForm,
+        update,
+        sortedState,
+        sorted
 
     }
 

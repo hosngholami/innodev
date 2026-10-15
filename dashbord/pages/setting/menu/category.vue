@@ -46,20 +46,14 @@
                حذف موارد انتخاب شده
             </button>
             <div class="dropdown">
-              <a  href="javascript:void(0);" class="btn btn-light btn-sm btn-wave waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false">
-                مرتب‌سازی بر اساس<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li>
-                  <a class="dropdown-item" href="javascript:void(0);">جدیدترین</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="javascript:void(0);">تاریخ افزودن</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="javascript:void(0);">الف - ی</a>
-                </li>
-              </ul>
+            <select class="btn btn-light btn-sm btn-wave waves-effect waves-light dropdown-menu" v-model="sortedState" @change="sorted">
+                  <option value="">
+                      مرتب‌سازی بر اساس<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                  </option>
+                  <option class="dropdown-item" value="title">عنوان</option>
+                  <option value="priority">اولویت</option>
+                  <option value="status">وضعیت</option>
+            </select>
             </div>
           </div>
         </div>
@@ -100,7 +94,7 @@
 
                   <td>
                     <div class="btn-list">
-                      <button data-bs-toggle="modal" data-bs-target="#update-category-menu" class="btn btn-sm btn-info-light btn-icon">
+                      <button data-bs-toggle="modal" @click="updateForm(item.id)" data-bs-target="#update-category-menu" class="btn btn-sm btn-info-light btn-icon">
                         <i class="ri-pencil-line"></i>
                       </button>
                       <button data-bs-toggle="modal" @click="selectedCategoryId = item.id" data-bs-target="#delete-category-menu" class="btn btn-sm btn-primary2-light btn-icon contact-delete">
@@ -224,7 +218,7 @@
           <button id="btn-close" type="button" class="btn m-0 btn-primary1-light me-2" data-bs-dismiss="modal"  >
             لغو
           </button>
-          <button type="button" @click="addCategory" class="btn m-0 btn-primary">
+          <button type="button" @click="update" class="btn m-0 btn-primary">
             ذخیره
           </button>
 
@@ -250,10 +244,9 @@
                   <path d="M0 0h24v24H0z" fill="none"></path>
                   <path  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path>
                 </svg>
-                <h5>اطلاع رسانی؟</h5>
-                <p class="">
-                  این هشدار برای نمایش اطلاعات مربوطه ایجاد شده است.
-                </p>
+                <h4 class="">
+                 آیا از حذف این مورد مطمئن هستید؟  
+                </h4>
                 <div class="">
                   <button  class="btn btn-sm btn-outline-danger m-1"  data-bs-dismiss="modal">
                     رد کردن
@@ -335,6 +328,10 @@ const {
         deleteCategory,
         selectedCategoryId,
         search,
+        update,
+        updateForm,
+        sortedState,
+        sorted
  } = useCategory();
 
 onMounted(() => {
