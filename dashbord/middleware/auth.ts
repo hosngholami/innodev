@@ -1,6 +1,6 @@
 import { useAuthStore } from '~/composables/auth/useAuth.js'
 export default defineNuxtRouteMiddleware(async (to) => {
-    const publicPages = ['/auth/singin', '/auth/login']
+    const publicPages = ['/authentication/singin', '/authentication/login']
 
     if (publicPages.includes(to.path)) {
         return

@@ -22,7 +22,10 @@ class CategoryMenuAPIView(GenericAPIView):
     
     
     def get_queryset(self):
-         return  CategoryMenu.objects.all()
+        #  return  CategoryMenu.objects.prefetch_related('menu').all()
+        return CategoryMenu.objects.prefetch_related(
+        'menu', 'menu__children'          # برای جلوگیری از N+1
+        ).all()
 
     def get(self, request, *args, **kwargs):
         
@@ -60,7 +63,6 @@ class CategoryMenuAPIView(GenericAPIView):
 
     
     def delete(self, request, *args, **kwargs):
-        # serializer = self.serializer_class(data=request.data, context={'request': request})
         categoryId = request.data.get("id")
         category = CategoryMenu.objects.filter(id=categoryId)
         category.delete()
@@ -74,19 +76,26 @@ class CategoryMenuAPIView(GenericAPIView):
 class MenuAPIView(GenericAPIView):
     
     serializer_class = MenuSerializer
+    pagination_class =  DefaultPagination
     
-    def get_queryset(self, request):
-        isParent = request.data.get('parent')
-        
-        if(isParent) :
-                return Menu.objects.filter(parent__isnull = True).all()
-        return Menu.objects.all()
     
+    def get_queryset(self):
+         return  Menu.objects.all()
+         
     def get(self, request, *args, **kwargs):
-        queryset = self.get_queryset(request)
-        serializer = self.serializer_class(queryset, many=True)
-        return Response(serializer.data)
+        
+        queryset = self.get_queryset()
+        queryset = self.filter_queryset(queryset)
+        
 
+        if ('id' in request.query_params and queryset.count() == 1):
+            instance = queryset.first()
+            serializer = self.serializer_class(instance) 
+            return Response(serializer.data)
+
+        queryset = self.paginate_queryset(queryset)
+        serializer = self.serializer_class(queryset, many=True)
+        return self.get_paginated_response(serializer.data)
 
 
 class MenuDateilAPIView(GenericAPIView):

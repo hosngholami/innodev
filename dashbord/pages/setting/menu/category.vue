@@ -48,7 +48,7 @@
             <div class="dropdown">
             <select class="btn btn-light btn-sm btn-wave waves-effect waves-light dropdown-menu" v-model="sortedState" @change="sorted">
                   <option value="">
-                      مرتب‌سازی بر اساس<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                      مرتب‌سازی بر اساس
                   </option>
                   <option class="dropdown-item" value="title">عنوان</option>
                   <option value="priority">اولویت</option>
