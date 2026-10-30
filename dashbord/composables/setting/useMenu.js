@@ -3,50 +3,53 @@ export default function () {
     const { $axios } = useNuxtApp()
 
 
-    const menuList = ref({})
     const partentList = ref({})
+    const menuList = ref({})
 
 
+  const form = ref({
+    title: "",
+    url: "",             
+    icon: "",
+    priority: 0,
+    status: 1,           
+    parent: null,
+    category_id: 117
+})
 
-    const form = reactive({
-        title :  "",
-        icon : "",
-        lable : "",
-        priority : 0,
-        status : true,
-        parent: -1
-
-    })
-
-    const getMenuList = async () => {
-            menuList.value = (await $axios.get('/setting/api/v1/menu/')).data
+const addMenu = async () => {
+    try {
+        const response = await $axios.post('/setting/api/v1/menu/', form.value)
+        console.log('موفق:', response.data)
+    } catch (error) {
+        console.log('خطای کامل:', error.response?.data)
+        console.log('وضعیت:', error.response?.status)
     }
-
+}
 
 
     const getParentList = async() => {
-         
-          partentList.value = (await $axios.get('/setting/api/v1/mene/', {"parent" : true})).data
-
-          console.log((await $axios.get('/setting/api/v1/mene/', {"parent" : true})).data)
+         const response =  (await $axios.get('/setting/api/v1/menu/parent/'))
+         console.log(response)
+          partentList.value = response.data.results
     }
 
 
-    const addMenu = async() => {
+    const getMenuList = async () => {
+          const response = (await $axios.get('/setting/api/v1/menu'))
+          menuList.value = response.data.results
 
-        console.log(form.parent)
-
+        
     }
 
-    
 
 
 
     return {
-        menuList,
-        getMenuList,
         partentList,
         getParentList,
+        getMenuList,
+        menuList,
         addMenu,
         form
     }

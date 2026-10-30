@@ -1207,20 +1207,12 @@ await getCategoryList()
                 <li class="slide" :class="{ 'has-sub': menu.children && menu.children.length }"
                   v-for="menu in category.menu" :key="menu.id">
                   <a href="javascript:void(0);" class="side-menu__item">
-                    <!-- آیکون فلش فقط وقتی زیرمنو دارد -->
                     <i class="ri-arrow-down-s-line side-menu__angle" v-if="menu.children && menu.children.length"></i>
 
-                    <!-- آیکون منو (اگر از backend آمده) -->
-                  <!-- <i :class="menu.icon" class="side-menu__icon" v-if="menu.icon"></i> -->
-       <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 side-menu__icon" fill="none"
-                    viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25">
-                    </path>
-                  </svg>
+                    <i :class="menu.icon" class="side-menu__icon" v-if="menu.icon"></i>
+                   
                     <span class="side-menu__label">{{ menu.title }}</span>
                   </a>
-
                   <!-- زیرمنوها -->
                   <ul class="slide-menu child1" v-if="menu.children && menu.children.length">
                     <li class="slide" v-for="child in menu.children" :key="child.id">

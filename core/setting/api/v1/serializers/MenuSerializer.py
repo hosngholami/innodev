@@ -1,19 +1,19 @@
 from rest_framework import serializers
-from setting.models import Menu
-
-
-# class MenuSerializer(serializers.ModelSerializer):
-#     category = serializers.CharField(
-#         source='category.title',
-#         read_only=True
-#     )
-#     class Meta:
-#         model = Menu
-#         fields = ['id', 'title', 'category']
+from setting.models import Menu, CategoryMenu
 
 
 class MenuSerializer(serializers.ModelSerializer):
     children = serializers.SerializerMethodField()
+    category_id = serializers.PrimaryKeyRelatedField(
+        queryset=CategoryMenu.objects.all(),
+        source='category' 
+    )
+    
+    parent = serializers.PrimaryKeyRelatedField(
+        queryset=Menu.objects.all(),
+        required=False,
+        allow_null=True
+    )
 
     class Meta:
         model = Menu
@@ -24,7 +24,9 @@ class MenuSerializer(serializers.ModelSerializer):
             'icon',
             'priority',
             'status',
-            'children'          # ← زیرمنوها
+            'children', 
+            'category_id',
+            'parent'
         ]
 
     def get_children(self, obj):

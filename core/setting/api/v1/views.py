@@ -1,6 +1,7 @@
 from rest_framework.generics import GenericAPIView
 from setting.api.v1.serializers.MenuSerializer import MenuSerializer
 from setting.api.v1.serializers.CategorySerializer import CategorySerializer
+from setting.api.v1.serializers.ParentMenuSerializer import ParentMenuSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from setting.models import *
@@ -22,10 +23,9 @@ class CategoryMenuAPIView(GenericAPIView):
     
     
     def get_queryset(self):
-        #  return  CategoryMenu.objects.prefetch_related('menu').all()
         return CategoryMenu.objects.prefetch_related(
-        'menu', 'menu__children'          # برای جلوگیری از N+1
-        ).all()
+        'menu', 'menu__children'        
+        ).order_by('priority').all()
 
     def get(self, request, *args, **kwargs):
         
@@ -70,14 +70,10 @@ class CategoryMenuAPIView(GenericAPIView):
         return Response(category, status=status.HTTP_200_OK)
 
 
-
-
-
 class MenuAPIView(GenericAPIView):
     
     serializer_class = MenuSerializer
     pagination_class =  DefaultPagination
-    
     
     def get_queryset(self):
          return  Menu.objects.all()
@@ -96,19 +92,43 @@ class MenuAPIView(GenericAPIView):
         queryset = self.paginate_queryset(queryset)
         serializer = self.serializer_class(queryset, many=True)
         return self.get_paginated_response(serializer.data)
-
-
-class MenuDateilAPIView(GenericAPIView):
-    serializer_class = MenuSerializer
-        
+    
+    
+    def post(self, request, *args, **kwargs):
+         serializer = self.serializer_class(data=request.data)
+         serializer.is_valid(raise_exception=True)
+         
+         if(serializer.is_valid()):
+             serializer.save()
+             return Response(serializer.data, status=status.HTTP_201_CREATED)
+         return Response('not valid', status=status.HTTP_400_BAD_REQUEST)
+    
+    
+    
+class ParentMenuAPIView(GenericAPIView):
+    serializer_class = ParentMenuSerializer
+    
     def get_queryset(self):
-            id = self.kwargs['id']
-            return Menu.objects.filter(id=id).first()
-        
+        return Menu.objects.filter(parent__isnull=True)
+    
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        serializer = self. serializer_class(queryset)
-        return Response(serializer.data)
+        queryset = self.filter_queryset(queryset)
+
+
+        if 'id' in request.query_params and queryset.count() == 1:
+            instance = queryset.first()
+            serializer = self.serializer_class(instance) 
+            return Response(serializer.data)
+
+        queryset = self.paginate_queryset(queryset)
+        serializer = self.serializer_class(queryset, many=True)
+        return self.get_paginated_response(serializer.data)
+
+
+
+    
+    
              
             
             

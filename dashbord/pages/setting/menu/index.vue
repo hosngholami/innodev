@@ -61,14 +61,12 @@
                     <input class="form-check-input check-all" type="checkbox" id="checkboxNoLabel" value=""
                       aria-label="..." />
                   </th>
-                  <th scope="col">عنوان</th>
-                  <th scope="col">برچسب</th>
+                  <th scope="col"> عنوان منو</th>
+                  <th scope="col">زیرمجموعه</th>
                   <th scope="col">آیکون</th>
                   <th scope="col">مسیر</th>
                   <th scope="col">فعال/غیرفعال</th>
                   <th scope="col">اولویت</th>
-                  <th scope="col">نوع</th>
-                  <th scope="col">والد</th>
                   <th scope="col">عملیات</th>
                 </tr>
               </thead>
@@ -78,17 +76,17 @@
                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel3" value="" aria-label="..." />
                   </td>
                   <td>
-                    <span class="d-block">{{ item.title }}</span>
+                    <!-- {{ item.children[0].length }} -->
+                    <span class="d-block" v-if="!item.parent">{{  item.title }}</span>
                   </td>
                   <td>
-                    <span class="d-block">{{ item.label }}</span>
+                    <span class="d-block" v-if="item.parent">{{ item.title }}</span>
                   </td>
                   <td>
                     <div>
                       <span class="d-block mb-1"><i v-bind:class="item.icon"></i></span>
                     </div>
                   </td>
-
                   <td>/dashbord</td>
                   <td>
                     <span class="badge bg-success-transparent" v-if="item.status">
@@ -104,21 +102,6 @@
                     </div>
                   </td>
                   <td>
-                    <div>
-                      <span class="d-block" v-if="item.parent == null">
-                        منوی اصلی
-                      </span>
-                      <span class="d-block" v-else>
-                        زیر منو
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div>
-                      <span class="d-block">-</span>
-                    </div>
-                  </td>
-                  <td>
                     <div class="btn-list">
                       <button data-bs-toggle="modal" data-bs-target="#create-contact"
                         class="btn btn-sm btn-info-light btn-icon">
@@ -126,6 +109,9 @@
                       </button>
                       <button class="btn btn-sm btn-primary2-light btn-icon contact-delete">
                         <i class="ri-delete-bin-line"></i>
+                      </button>
+                      <button class="btn btn-xl btn-primary2-light btn-icon">
+                        <i class="bi bi-blockquote-right"></i>
                       </button>
                     </div>
                   </td>
@@ -356,25 +342,23 @@
             <div class="col-xl-12"></div>
             <div class="col-xl-12">
               <label for="deal-title" class="form-label">عنوان منو</label>
-              <input type="text" class="form-control" id="deal-title" placeholder="عنوان منو" v-bind="form.title" />
+              <input type="text" class="form-control" id="deal-title" placeholder="عنوان منو" v-model="form.title" />
             </div>
             <div class="col-xl-12">
               <label for="contact-lead-score" class="form-label">آیکون</label>
-              <input type="text" class="form-control" id="contact-lead-score" placeholder="آیکون" v-bind="form.icon" />
+              <input type="text" class="form-control" id="contact-lead-score" placeholder="آیکون" v-model="form.icon" />
             </div>
-            <div class="col-xl-12">
-              <label for="contact-mail" class="form-label">برچسب</label>
-              <input type="email" class="form-control" id="contact-mail" placeholder="برچسب" v-bind="form.lable" />
-            </div>
+
             <div class="col-xl-12">
               <label for="contact-phone" class="form-label">مسیر</label>
-              <input type="tel" class="form-control" id="contact-phone" placeholder="مسیر" />
+              <input type="tel" class="form-control" id="contact-phone" placeholder="مسیر" v-model="form.url" />
             </div>
             <div class="col-xl-12">
-              <label class="form-label">والد</label>
-              <select class="form-control">
-                <option value="-1">انتخاب کنید</option>
-                <option value="1" v-for="item in partentList">داشبورد</option>
+              <label class="form-label">دسته بندی</label>
+              <select class="form-control" v-model="form.category_id">
+                <option :key=null>انتخاب کنید</option>
+                <option :value="Number(category.id)" :key="category.id" v-for="category in categoryList">
+                  {{ category.title }}</option>
               </select>
             </div>
           </div>
@@ -383,7 +367,7 @@
           <button type="button" class="btn m-0 btn-primary1-light me-2" data-bs-dismiss="modal">
             لغو
           </button>
-          <button type="button" class="btn m-0 btn-primary">ذخیره</button>
+          <button type="button" class="btn m-0 btn-primary" @click="addMenu">ذخیره</button>
         </div>
       </div>
     </div>
@@ -395,11 +379,14 @@
 <script setup>
 
 import useMenu from '@/composables/setting/useMenu';
-const { form, getMenuList, menuList, partentList, getParentList } = useMenu();
+import useCategory from "~/composables/setting/useCategory";
+const { form, partentList, getParentList, addMenu, menuList, getMenuList } = useMenu();
+const { getCategoryList, categoryList } = useCategory();
 
 
 onMounted(() => {
-
+  getParentList()
+  getCategoryList()
   getMenuList()
 })
 
