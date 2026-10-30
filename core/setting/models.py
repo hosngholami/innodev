@@ -26,6 +26,7 @@ class Menu(models.Model):
     
     class Meta:
         db_table = "Menu"
+        ordering = ['priority']
 
 
 

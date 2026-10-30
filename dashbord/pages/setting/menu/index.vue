@@ -57,66 +57,18 @@
             <table class="table text-nowrap table-hover">
               <thead>
                 <tr>
-                  <th scope="col">
-                    <input class="form-check-input check-all" type="checkbox" id="checkboxNoLabel" value=""
-                      aria-label="..." />
-                  </th>
-                  <th scope="col"> عنوان منو</th>
-                  <th scope="col">زیرمجموعه</th>
-                  <th scope="col">آیکون</th>
-                  <th scope="col">مسیر</th>
-                  <th scope="col">فعال/غیرفعال</th>
-                  <th scope="col">اولویت</th>
-                  <th scope="col">عملیات</th>
+                  <th>...</th>
+                  <th>عنوان</th>
+                  <th>برچسب</th>
+                  <th>آیکون</th>
+                  <th>مسیر</th>
+                  <th>فعال/غیرفعال</th>
+                  <th>اولویت</th>
+                  <th>عملیات</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="crm-contact contacts-list" v-for="item in menuList">
-                  <td class="contacts-checkbox">
-                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel3" value="" aria-label="..." />
-                  </td>
-                  <td>
-                    <!-- {{ item.children[0].length }} -->
-                    <span class="d-block" v-if="!item.parent">{{  item.title }}</span>
-                  </td>
-                  <td>
-                    <span class="d-block" v-if="item.parent">{{ item.title }}</span>
-                  </td>
-                  <td>
-                    <div>
-                      <span class="d-block mb-1"><i v-bind:class="item.icon"></i></span>
-                    </div>
-                  </td>
-                  <td>/dashbord</td>
-                  <td>
-                    <span class="badge bg-success-transparent" v-if="item.status">
-                      فعال
-                    </span>
-                    <span class="badge bg-success-transparent" v-if="item.status == false">
-                      غیرفعال
-                    </span>
-                  </td>
-                  <td>
-                    <div>
-                      <span class="d-block">{{ item.priority }}</span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="btn-list">
-                      <button data-bs-toggle="modal" data-bs-target="#create-contact"
-                        class="btn btn-sm btn-info-light btn-icon">
-                        <i class="ri-pencil-line"></i>
-                      </button>
-                      <button class="btn btn-sm btn-primary2-light btn-icon contact-delete">
-                        <i class="ri-delete-bin-line"></i>
-                      </button>
-                      <button class="btn btn-xl btn-primary2-light btn-icon">
-                        <i class="bi bi-blockquote-right"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
+                <MenuRow v-for="item in menuList"  :key="item.id" :item="item" :level="0" />
               </tbody>
             </table>
           </div>

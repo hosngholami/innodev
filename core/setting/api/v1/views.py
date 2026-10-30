@@ -1,4 +1,4 @@
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 from setting.api.v1.serializers.MenuSerializer import MenuSerializer
 from setting.api.v1.serializers.CategorySerializer import CategorySerializer
 from setting.api.v1.serializers.ParentMenuSerializer import ParentMenuSerializer
@@ -10,7 +10,6 @@ from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as filters
 from rest_framework.filters import SearchFilter, OrderingFilter
-
 
 
 class CategoryMenuAPIView(GenericAPIView):
@@ -69,14 +68,13 @@ class CategoryMenuAPIView(GenericAPIView):
         
         return Response(category, status=status.HTTP_200_OK)
 
-
 class MenuAPIView(GenericAPIView):
     
     serializer_class = MenuSerializer
     pagination_class =  DefaultPagination
     
     def get_queryset(self):
-         return  Menu.objects.all()
+         return  Menu.objects.filter(parent__isnull=True).all()
          
     def get(self, request, *args, **kwargs):
         

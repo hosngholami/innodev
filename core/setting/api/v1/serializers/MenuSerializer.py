@@ -4,29 +4,19 @@ from setting.models import Menu, CategoryMenu
 
 class MenuSerializer(serializers.ModelSerializer):
     children = serializers.SerializerMethodField()
-    category_id = serializers.PrimaryKeyRelatedField(
-        queryset=CategoryMenu.objects.all(),
-        source='category' 
-    )
-    
-    parent = serializers.PrimaryKeyRelatedField(
-        queryset=Menu.objects.all(),
-        required=False,
-        allow_null=True
-    )
 
     class Meta:
         model = Menu
         fields = [
-            'id',
-            'title',
-            'url',
-            'icon',
-            'priority',
+            'id', 
+            'title', 
+            'url', 
+            'icon', 
+            'priority', 
             'status',
-            'children', 
-            'category_id',
-            'parent'
+            'parent', 
+            'category', 
+            'children'
         ]
 
     def get_children(self, obj):
