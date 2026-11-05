@@ -73,7 +73,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="crm-contact contacts-list" v-for="item in categoryList">
+                <tr class="crm-contact contacts-list" v-for="item in List">
                   <td class="contacts-checkbox">
                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel3" value="" aria-label="..." />
                   </td>
@@ -111,14 +111,10 @@
             </table>
           </div>
         </div>
-        
-        <Pagination 
-                    :currentPageCount="currentPageCount" 
-                    :PreviousPage="PreviousPage"
-                    :PreviousPageState="PreviousPageState" 
-                    :currentPage="currentPage" 
-                    :nextPage="nextPage"
-                    :nextPageState="nextPageState" />
+
+        <Pagination :currentPageCount="CurrentPageCount" :PreviousPage="PreviousPage"
+          :PreviousPageState="PreviousPageState" :currentPage="CurrentPage" :nextPage="NextPage"
+          :nextPageState="NextPageState" />
       </div>
     </div>
   </div>
@@ -248,7 +244,7 @@
         <div class="modal-footer"></div>
       </div>
     </div>
-  </div>
+  </div> 
 
   <div class="modal fade" id="search-category-menu" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -301,29 +297,26 @@
 import useCategory from "~/composables/setting/useCategory";
 const {
   form,
-  categoryList,
   getCategoryList,
-  addCategory,
-  loading,
-  errors,
-  nextPage,
-  currentPage,
+  List,
+  CurrentPage,
+  CurrentPageCount,
   PreviousPage,
-  nextPageState,
   PreviousPageState,
-  count,
-  currentPageCount,
-  deleteCategory,
-  selectedCategoryId,
-  search,
-  update,
+  NextPage,
+  NextPageState,
+  errors,
+  loading,
+  addCategory,
   updateForm,
-  sortedState,
-  sorted
-} = useCategory();
+  update,
+  deleteCategory,
+  selectedCategoryId
+
+} = useCategory()
 
 onMounted(() => {
-  getCategoryList();
+  getCategoryList()
 });
 
 definePageMeta({

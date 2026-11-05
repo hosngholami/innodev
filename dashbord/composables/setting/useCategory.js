@@ -1,19 +1,17 @@
 import { ref } from 'vue'
 import Validator from 'validatorjs/dist/validator'
+import BaseState from '~/utils/baseState'
+
+
 export default function () {
+
+
+    const state = new BaseState()
 
     const { $axios } = useNuxtApp()
     const loading = ref(false)
     const errors = ref({})
 
-    const categoryList = ref({})
-
-
-    const currentPage = ref(1)
-    const nextPageState = ref(null)
-    const PreviousPageState = ref(null)
-    const count = ref(0)
-    const currentPageCount = ref(0)
     const selectedCategoryId = ref(null)
     const filterSate = ref(false)
     const sortedState = ref('')
@@ -59,53 +57,50 @@ export default function () {
         }
 
         const params = {
-            page: currentPage.value,
+            page: state.CurrentPage.value
         }
 
-        if(sortedState.value != null){
-                params.ordering = '-' + sortedState.value
+        if (sortedState.value != null) {
+            params.ordering = '-' + sortedState.value
         }
 
 
-        if(form.value.title?.trim()){
-             params.search = form.value.title
+        if (form.value.title?.trim()) {
+            params.search = form.value.title
         }
-        if(form.value.status != -1){
+        if (form.value.status != -1) {
             params.status = form.value.status
         }
 
-        if(form.value.priority != 0) {
+        if (form.value.priority != 0) {
             params.priority = form.value.priority
         }
 
         try {
-            const response = (await $axios.get('/setting/api/v1/category', {params }))
-            nextPageState.value = response.data.next;
-            PreviousPageState.value = response.data.previous;
-            categoryList.value = response.data.results;
-            count.value = response.data.count;
-            currentPageCount.value = response.data.current_page_count;
+            const response = (await $axios.get('/setting/api/v1/category', { params }))
+            console.log(response.data.results)
+            state.setListData(response)
         }
         catch (error) {
             errors.value = error;
         }
         finally {
             loading.value = false;
-        };
+        }
     }
 
-    const nextPage = async () => {
-        currentPage.value += 1
+    const NextPage = async () => {
+        state.CurrentPage.value += 1
         await getCategoryList()
     }
 
     const PreviousPage = async () => {
-        currentPage.value -= 1
+        state.CurrentPage.value -= 1
         await getCategoryList()
     }
 
 
-   
+
 
     const updateForm = async (id) => {
 
@@ -138,9 +133,9 @@ export default function () {
     }
 
 
-   const sorted = async () => {
-            await getCategoryList()
-   }
+    const sorted = async () => {
+        await getCategoryList()
+    }
 
 
     const addCategory = async () => {
@@ -177,7 +172,7 @@ export default function () {
     }
 
     const search = async () => {
-        currentPage.value = 1
+        state.CurrentPage.value = 1
         filterSate.value = true
         await getCategoryList()
         const modalElement = document.getElementById('search-category-menu')
@@ -203,12 +198,12 @@ export default function () {
 
             modal?.hide()
 
-            if (currentPageCount.value == 1) {
-                currentPage.value -= 1
+            if (state.CurrentPageCount.value == 1) {
+                state.CurrentPage.value -= 1
             }
 
-            if (currentPage.value == 0) {
-                currentPage.value = 1;
+            if (state.CurrentPage.value == 0) {
+                state.CurrentPage.value = 1;
             }
             await getCategoryList();
             clearForm();
@@ -222,26 +217,17 @@ export default function () {
 
     return {
         form,
-        categoryList,
         getCategoryList,
-        addCategory,
-        loading,
-        errors,
-        nextPage,
-        currentPage,
+        NextPage,
         PreviousPage,
-        nextPageState,
-        PreviousPageState,
-        count,
-        currentPageCount,
-        deleteCategory,
-        selectedCategoryId,
-        search,
+        errors,
+        loading,
+        addCategory,
         updateForm,
         update,
-        sortedState,
-        sorted
-
+        deleteCategory,
+        selectedCategoryId,
+        sorted,
+        ...state,
     }
-
 }
