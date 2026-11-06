@@ -331,7 +331,7 @@
 <script setup>
 
 import useMenu from '@/composables/setting/useMenu';
-import useCategory from "~/composables/setting/useCategory";
+import useCategory from "~/composables/setting/useCategory1";
 const { form, partentList, getParentList, addMenu, menuList, getMenuList } = useMenu();
 const { getCategoryList, categoryList } = useCategory();
 

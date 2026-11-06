@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import Validator from 'validatorjs/dist/validator'
+// import Validator from 'validatorjs/dist/validator'
 import BaseState from '~/utils/baseState'
 
 

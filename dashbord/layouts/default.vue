@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { nextTick } from 'vue'
 import useSignout from "~/composables/auth/useSignout";
-import useCategory from "~/composables/setting/useCategory";
+import useCategory from "~/composables/setting/useCategory1";
 const { getCategoryList, categoryList } = useCategory();
 const { signout } = useSignout();
 await getCategoryList()

@@ -9,14 +9,15 @@
                     <ul class="pagination mb-0">
                         <li class="page-item">
 
-                            <button @click="PreviousPage" class="page-link text-primary "
-                                :disabled="PreviousPageState == null"> قبلی </button>
+                            <button @click="PreviousPage" class="page-link text-primary "> قبلی </button>
                         </li>
                         <li class="page-item active">
                             <a class="page-link" href="javascript:void(0);">{{ currentPage }}</a>
                         </li>
                         <li class="page-item">
-                            <button @click="nextPage" :disabled="nextPageState == null" class="page-link text-primary">
+    
+
+                             <button @click="nextPage"  class="page-link text-primary">
                                 بعدی
                             </button>
                         </li>
