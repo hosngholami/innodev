@@ -53,6 +53,7 @@ class CategoryMenuAPIView(GenericAPIView):
      
     def put(self, request, *args, **kwargs):
           categoryId = request.data.get("id")
+          print(f'categoryId: {categoryId}')
           category = CategoryMenu.objects.filter(id=categoryId).first()
           serializer = self.serializer_class(category, data=request.data)
           serializer.is_valid(raise_exception=True)

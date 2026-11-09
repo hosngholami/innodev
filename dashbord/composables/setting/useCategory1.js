@@ -129,7 +129,6 @@ export default function () {
         const modal = bootstrap.Modal.getInstance(modalElement)
 
         modal?.hide()
-
     }
 
 

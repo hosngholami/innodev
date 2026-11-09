@@ -36,11 +36,13 @@
           </div>
           <div class="d-flex flex-wrap gap-2">
 
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#create-category-menu">
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" @click="category.clearForm()"
+              data-bs-target="#create-category-menu">
               <i class="ri-add-line me-1 fw-medium align-middle"></i> ایجاد دسته
               بندی
             </button>
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#search-category-menu">
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" @click="category.clearForm()"
+              data-bs-target="#search-category-menu">
               <i class="bi bi-search"></i> جستجو
             </button>
             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#create-category-menu">
@@ -97,15 +99,15 @@
 
                   <td>
                     <div class="btn-list">
-                      <!-- <button data-bs-toggle="modal" @click="updateForm(item.id)" data-bs-target="#update-category-menu"
-                        class="btn btn-sm btn-info-light btn-icon">
+                      <button data-bs-toggle="modal" @click="category.getSingle(item.id)"
+                        data-bs-target="#update-category-menu" class="btn btn-sm btn-info-light btn-icon">
                         <i class="ri-pencil-line"></i>
-                      </button> -->
-                      <!-- <button data-bs-toggle="modal" @click="selectedCategoryId = item.id"
+                      </button>
+                      <button data-bs-toggle="modal" @click="category.getSingle(item.id)"
                         data-bs-target="#delete-category-menu"
                         class="btn btn-sm btn-primary2-light btn-icon contact-delete">
                         <i class="ri-delete-bin-line"></i>
-                      </button> -->
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -114,7 +116,8 @@
           </div>
         </div>
 
-        <Pagination :currentPage="category.currentPage" :nextPage="next" :PreviousPage="previous" />
+        <Pagination :currentPage="category.currentPage" :nextPage="next" :PreviousPage="previous"
+          :currentPageCount="category.currentPageCount" />
       </div>
     </div>
   </div>
@@ -156,6 +159,130 @@
           </button>
           <button type="button" @click="category.add()" class="btn m-0 btn-primary">
             ذخیره
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="update-category-menu" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title">ویرایش دسته بندی</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row gy-3">
+            <div class="col-xl-12"></div>
+            <div class="col-xl-12">
+              <label for="deal-title" class="form-label">عنوان دسته بندی</label>
+              <input type="text" v-model="category.form.title" class="form-control" placeholder="عنوان دسته بندی" />
+              <div v-if="category.errors.title" class="error-feedback"> {{ category.errors.title[0] }}</div>
+            </div>
+            <div class="col-xl-12">
+              <label for="contact-lead-score" class="form-label">اولویت</label>
+              <input type="number" v-model="category.form.priority" class="form-control" placeholder="اولویت" />
+              <div v-if="category.errors.priority" class="error-feedback"> {{ category.errors.priority[0] }}</div>
+            </div>
+            <div class="col-xl-12">
+              <label class="form-label">وضعیت</label>
+              <select v-model="category.form.status" class="form-control">
+                <option value="-1">انتخاب کنید</option>
+                <option value="1">فعال</option>
+                <option value="0">غیرفعال</option>
+              </select>
+              <div v-if="category.errors.status" class="error-feedback"> {{ category.errors.status[0] }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-close" type="button" class="btn m-0 btn-primary1-light me-2" data-bs-dismiss="modal">
+            لغو
+          </button>
+          <button type="button" @click="category.update" class="btn m-0 btn-primary">
+            ذخیره
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="delete-category-menu" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row gy-3">
+            <div class="col-xl-12"></div>
+            <div class="col-xl-12">
+              <div class="text-center px-5 pb-0 svg-primary">
+                <svg class="custom-alert-icon" xmlns="http://www.w3.org/2000/svg" height="1.5rem" viewbox="0 0 24 24"
+                  width="1.5rem" fill="#000000">
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+                  </path>
+                </svg>
+                <h4 class="">
+                  آیا از حذف این مورد مطمئن هستید؟
+                </h4>
+                <div class="">
+                  <button class="btn btn-sm btn-outline-danger m-1" data-bs-dismiss="modal">
+                    رد کردن
+                  </button>
+                  <button type="button" @click="category.delete()" class="btn btn-sm btn-primary m-1">پذیرفتن</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="search-category-menu" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title">فیلتر دسته بندی</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row gy-3">
+            <div class="col-xl-12"></div>
+            <div class="col-xl-12">
+              <label for="deal-title" class="form-label">عنوان دسته بندی</label>
+              <input type="text" v-model="category.form.title" class="form-control" placeholder="عنوان دسته بندی" />
+
+            </div>
+            <div class="col-xl-12">
+              <label for="contact-lead-score" class="form-label">اولویت</label>
+              <input type="number" v-model="category.form.priority" class="form-control" placeholder="اولویت" />
+
+            </div>
+            <div class="col-xl-12">
+              <label class="form-label">وضعیت</label>
+              <select v-model="category.form.status" class="form-control">
+                <option value="-1">انتخاب کنید</option>
+                <option value="1">فعال</option>
+                <option value="0">غیرفعال</option>
+              </select>
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-close" type="button" class="btn m-0 btn-primary1-light me-2" data-bs-dismiss="modal">
+            لغو
+          </button>
+          <button type="button" @click="category.search()" class="btn m-0 btn-primary">
+            فیلتر
           </button>
 
         </div>
