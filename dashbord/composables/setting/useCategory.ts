@@ -34,7 +34,7 @@ export class useCategory implements IEntityListManager {
 
     async getList(): Promise<void> {
         // this.loading.value = true
-        this.errors.value = {}
+        // this.errors.value = {}
 
 
         const params: any = {
@@ -51,15 +51,14 @@ export class useCategory implements IEntityListManager {
         }
 
 
-        // if (this.form.status != -1) {
-        //     params.status = this.form.status
-        // }
+        if (this.form.status != -1) {
+            params.status = this.form.status
+        }
 
-        console.log(params)
 
-        // if (this.form.priority != 0) {
-        //     params.priority = this.form.priority
-        // }
+        if (this.form.priority != 0) {
+            params.priority = this.form.priority
+        }
 
         try {
             const response = await this.$axios.get('/setting/api/v1/category', { params })
@@ -67,9 +66,9 @@ export class useCategory implements IEntityListManager {
             this.totalPageSize = response.data.totalPageSize
             this.currentPageCount = response.data.currentPageCount
         } catch (error) {
-            this.errors.value = error as any
+            // this.errors.value = error as any
         } finally {
-            this.loading.value = false
+            // this.loading.value = false
         }
     }
 
@@ -80,17 +79,12 @@ export class useCategory implements IEntityListManager {
             }
         })).data
 
-
-
         this.form = {
             id: response.id,
             title: response.title,
             priority: response.priority,
             status: response.status
         }
-
-
-
     }
 
 
@@ -137,6 +131,7 @@ export class useCategory implements IEntityListManager {
     async update(): Promise<void> {
         const response = (await this.$axios.put('/setting/api/v1/category/', this.form)).data
 
+        this.clearForm()
         this.getList()
 
         if (import.meta.client) {

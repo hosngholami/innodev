@@ -1,5 +1,5 @@
 export interface IEntityListManager {
-  loading: Ref<boolean>
+  // loading: Ref<boolean>
   // errors: Ref<Record<string, any>>
   sortedState: Ref<Number>
   list: Ref<Record<string, any>>

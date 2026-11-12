@@ -1,10 +1,20 @@
 <script setup lang="ts">
-import { nextTick } from 'vue'
+import { nextTick, onMounted } from 'vue'
 import useSignout from "~/composables/auth/useSignout";
-import useCategory from "~/composables/setting/useCategory1";
-const { getCategoryList, categoryList } = useCategory();
+import { useCategory } from '@/composables/setting/useCategory'
+import Menu from '~/components/Menu.vue';
+const category = reactive(new useCategory())
+
+
+await category.getList()
+
+
 const { signout } = useSignout();
-await getCategoryList()
+onMounted(async () => {
+  await nextTick()
+  category.getList()
+
+})
 
 </script>
 <template>
@@ -1154,6 +1164,7 @@ await getCategoryList()
 
         <!-- Start::main-sidebar -->
         <div class="main-sidebar" id="sidebar-scroll">
+
           <!-- Start::nav -->
           <nav class="main-menu-container nav nav-pills flex-column sub-open">
             <div class="slide-left" id="slide-left">
@@ -1163,9 +1174,7 @@ await getCategoryList()
             </div>
             <ul class="main-menu">
               <!-- Start::slide__category -->
-              <li class="slide__category">
-                <span class="category-name">تنظیمات</span>
-              </li>
+              <li class="slide__category"><span class="category-name">اصلی</span></li>
               <!-- End::slide__category -->
 
               <!-- Start::slide -->
@@ -1178,62 +1187,88 @@ await getCategoryList()
                       d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25">
                     </path>
                   </svg>
-                  <span class="side-menu__label">تنظیمات سایت</span>
+                  <span class="side-menu__label">داشبوردها</span>
                 </a>
                 <ul class="slide-menu child1">
                   <li class="slide side-menu__label1">
                     <a href="javascript:void(0)">داشبوردها</a>
                   </li>
-
                   <li class="slide">
-                    <nuxt-link to="/setting/menu/category" class="side-menu__item">برچسب</nuxt-link>
+                    <a href="index.html" class="side-menu__item">فروش</a>
                   </li>
                   <li class="slide">
-                    <nuxt-link to="/setting/menu" class="side-menu__item">منو</nuxt-link>
+                    <a href="index2.html" class="side-menu__item">تحلیل‌ها</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index3.html" class="side-menu__item">تجارت الکترونیک</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index4.html" class="side-menu__item">مدیریت ارتباط با مشتری</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index5.html" class="side-menu__item">مدیریت منابع انسانی</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index6.html" class="side-menu__item">NFT</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index7.html" class="side-menu__item">ارز دیجیتال</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index8.html" class="side-menu__item">شغل‌ها</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index9.html" class="side-menu__item">پروژه‌ها</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index10.html" class="side-menu__item">دوره‌ها</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index11.html" class="side-menu__item">سهام</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index12.html" class="side-menu__item">پزشکی</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index13.html" class="side-menu__item">سیستم فروش</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index14.html" class="side-menu__item">پادکست</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index15.html" class="side-menu__item">مدرسه</a>
+                  </li>
+                  <li class="slide">
+                    <a href="index16.html" class="side-menu__item">رسانه اجتماعی</a>
                   </li>
                 </ul>
               </li>
               <!-- End::slide -->
-              <!-- Start::slide -->
+
+              <!-- Start::slide__category -->
 
               <!-- End::slide__category -->
-              <template v-for="category in categoryList" :key="category.id">
-                <!-- عنوان دسته‌بندی -->
-                <li class="slide__category">
-                  <span class="category-name">{{ category.title }}</span>
-                </li>
+              <!-- Start::slide -->
 
-                <!-- منوهای سطح اول این دسته -->
-                <li class="slide" :class="{ 'has-sub': menu.children && menu.children.length }"
-                  v-for="menu in category.menu" :key="menu.id">
-                  <a href="javascript:void(0);" class="side-menu__item">
-                    <i class="ri-arrow-down-s-line side-menu__angle" v-if="menu.children && menu.children.length"></i>
+              <template v-for="category in category.list.value" :key="category.id">
+                <li class="slide__category"><span class="category-name">{{ category.title }}</span></li>
+                <Menu :menu="category.menu" />
 
-                    <i :class="menu.icon" class="side-menu__icon" v-if="menu.icon"></i>
-                   
-                    <span class="side-menu__label">{{ menu.title }}</span>
-                  </a>
-                  <!-- زیرمنوها -->
-                  <ul class="slide-menu child1" v-if="menu.children && menu.children.length">
-                    <li class="slide" v-for="child in menu.children" :key="child.id">
-                      <nuxt-link :to="child.url" class="side-menu__item">
-                        <i :class="child.icon" v-if="child.icon"></i>
-                        {{ child.title }}
-                      </nuxt-link>
-                    </li>
-                  </ul>
-                </li>
+
               </template>
 
-              <!-- End::slide -->
+
+
+
+              <!-- Start::slide -->
             </ul>
-            <div class="slide-right" id="slide-right">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewbox="0 0 24 24">
+            <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24"
+                height="24" viewbox="0 0 24 24">
                 <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
-              </svg>
-            </div>
+              </svg></div>
           </nav>
           <!-- End::nav -->
+
         </div>
         <!-- End::main-sidebar -->
       </aside>
